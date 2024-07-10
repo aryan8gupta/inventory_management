@@ -332,9 +332,11 @@ def shops(request):
 	
     user_type = data.get('user_type')
     user_name = data.get('first_name')
+
+    shops_details = list(DB.shops.find({"user_type": "Shops"}))
     
     return render(request, 'shops.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'shops_details': shops_details})
 
 
 
@@ -351,7 +353,37 @@ def shops_add(request):
     user_type = data.get('user_type')
     user_name = data.get('first_name')
     
-    return render(request, 'shops_add.html', { 'dashboard': 
+    if request.method == 'POST':
+        try:
+            shop_contact = request.POST.get("shop_contact")
+            shops_doc = DB.shops.find_one({"shop_contact_number": shop_contact})
+
+            if not shops_doc:
+
+                shop_name = request.POST.get("shop_name")
+                shop_address = request.POST.get("shop_address")
+                shop_contact = request.POST.get("shop_contact")
+       
+                shops_dict = {
+	                "shop_name": shop_name,
+	                "shop_address": shop_address,
+	                "shop_contact_number": shop_contact,
+	                "user_type": 'Shops',
+	            }
+
+                DB.shops.insert_one(shops_dict)
+
+                return redirect("/shops/")
+
+            else:
+                raise Exception
+            
+        except:
+            messages.warning(request, "Already Registered")
+            return render(request, 'shops_add.html')
+            
+    else:
+        return render(request, 'shops_add.html', { 'dashboard': 
 													   dashboard, 'user_type': user_type, 'first_name': user_name})
 
 

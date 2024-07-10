@@ -26,7 +26,7 @@
     <main id="main" class="main">
       <div class="con row">
         <div class="add_products col">
-          <a href="/employee-signup/">
+          <a href="/shops-add/">
               <button>
                   <i class="bi bi-plus mt-1" style="font-size: 30px;"></i>
                   <h6 class="mt-3 mx-2">Add Shops</h6>
@@ -47,45 +47,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">Mittal Paneer Bhandar</th>
-                <td>Chotha Bazar, Jawla Nagar</td>
-                <td>9712023084</td>
-                <td>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                      </svg>
-                    </button></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Arora</th>
-                <td>Ram Nagar, Shahdara</td>
-                <td>8752823084</td>
-                <td>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                      </svg>
-                    </button></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Mercedes Showroom</th>
-                <td>South Delhi</td>
-                <td>7762023084</td>
-                <td>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                      </svg>
-                    </button></a>
-                </td>
-              </tr>
+              {% for shops in shops_details %}
+                <tr>
+                  <th scope="row">{{shops.shop_name}}</th>
+                  <td>{{shops.shop_address}}</td>
+                  <td>{{shops.shop_contact_number}}</td>
+                  <td>
+                      <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                        </svg>
+                      </button></a>
+                  </td>
+                </tr>
+              {% endfor %}
             </tbody>
         
         </table>

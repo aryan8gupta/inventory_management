@@ -27,8 +27,7 @@ urlpatterns = [
 
     path('barcode/', views.barcode),
     # ----------------------------------->
-
-
+    
     # Admin ----------------------->
     path('shops/', views.shops),
     path('shops-add/', views.shops_add),

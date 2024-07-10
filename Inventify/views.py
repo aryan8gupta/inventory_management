@@ -226,6 +226,7 @@ def barcode(request):
 
 
 
+
 def employee(request):
     valid = False
     data = {}

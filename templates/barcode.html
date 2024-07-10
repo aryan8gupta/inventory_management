@@ -3,10 +3,40 @@
 {% block contain %}
 
     <main id="main" class="main">
-        <button class="btn btn-primary">Cancel</button>
-        <button class="btn btn-success">Save</button>
+        <div class="container">
+            <div class="row" style="display: flex; justify-content: center; align-items: center; width: 70vw; height: 70vh;">
+
+                <div class="col-8" style="display: flex; justify-content: start;">                
+                    <!-- <img src="../assets/img/{{products.image}}"  class="img-fluid max-width: 100%; height: auto;" alt="Responsive image"> -->
+                    <img src="../assets/img/Small_Water_Bottle.jpg" class="img-fluid max-width: 100%; height: auto;" style="height: 60vh;" alt="Responsive image">
+                </div>
+
+                <div class="col-4">
+                    <h2>Barcode Scanner Input</h2>
+                    <input type="text" id="barcodeInput" autofocus>
+                    <p id="output"></p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="btn-di d-none d-md-block ps-2 float-end" style="margin-right: 40px;">
+            <button class="btn btn-success" style="font-size: 25px; border-radius: 10px; border: 2px solid darkgreen; padding: 10px 17px 10px 17px;">Next</button>
+        </div>
 
     </main> <!-- End #main -->
+    <script>
+        document.getElementById('barcodeInput').addEventListener('input', function(event) {
+            var barcodeValue = event.target.value.trim();
+            if (barcodeValue !== '') {
+                handleBarcodeInput(barcodeValue);
+            }
+        });
 
+        function handleBarcodeInput(barcodeValue) {
+            console.log('Scanned barcode: ' + barcodeValue);
+            document.getElementById('output').textContent = 'Scanned barcode: ' + barcodeValue;
+            document.getElementById('barcodeInput').value = '';
+        }
+    </script>
 
 {% endblock %}

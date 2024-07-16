@@ -1,3 +1,4 @@
+import json
 from bson import ObjectId
 from django.contrib.auth import authenticate, login, logout;
 from django.contrib import messages;
@@ -10,7 +11,7 @@ from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
 from Inventify.settings import DB, PUBLIC_KEY
 
-
+product_list1 = []
 
 def generate_password(a):
     bytes = a.encode('utf-8') 
@@ -108,7 +109,8 @@ def products_add(request):
 
                 products_dict = {
 	                "product_name": products_name,
-	                "quantity": products_quantity,
+	                "bought_quantity": products_quantity,
+	                "left_quantity": products_quantity,
 	                "cost_price": products_cost_price,
 	                "selling_price": products_selling_price,
 	                "expiry_date": products_expiry_date,
@@ -186,9 +188,14 @@ def products_sold(request):
 	
     user_type = data.get('user_type')
     user_name = data.get('first_name')
+    user_email = data.get('email')
+
+    users_id_doc = DB.users.find_one({'email': user_email})
+
+    products_doc = list(DB.products_sold.find({'user_id': users_id_doc['_id']}))
     
     return render(request, 'products_sold.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'products_doc': products_doc})
 
 
 
@@ -209,6 +216,7 @@ def contact_us(request):
 
 
 
+@csrf_exempt
 def barcode(request):
     valid = False
     data = {}
@@ -221,11 +229,100 @@ def barcode(request):
     user_type = data.get('user_type')
     user_name = data.get('first_name')
     
-    return render(request, 'barcode.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+
+    num = '0'
+    sum1 = 0
+    product_name_list = [] 
+    global product_list1
+
+    if request.method == 'POST':
+        try:
+            if request.POST.get("form_type") == 'rm_data1':
+                barcodeInput = request.POST.get("barcodeInput")
+                number = '1'
+
+                barcode_doc = DB.products.find_one({"barcode": barcodeInput})
+
+                new_quantity = int(barcode_doc['left_quantity']) - 1
+
+                DB.products.find_one_and_update({'barcode': barcodeInput}, {'$set': {'left_quantity': new_quantity}})
+
+                if barcode_doc:
+            
+                    product_list1.append(barcode_doc)
+                    for data in product_list1:
+
+                        sum1 = sum1 + int(data['selling_price'])
+
+                    return render(request, 'barcode.html', { 'dashboard': 
+			    									   dashboard, 'user_type': user_type, 'first_name': user_name, 'barcode_data': product_list1, 'barcode_doc': barcode_doc, 'num': number, 'totalMoney' : sum1})
+                else:
+                    raise Exception
+
+
+            elif request.POST.get("form_type") == 'delete_data':
+                deleted_product_barcode = request.POST.get("deleted_product")
+                number = '1'
+
+                barcode_doc = DB.products.find_one({"barcode": deleted_product_barcode})
+
+                for i in range(len(product_list1)):
+                    if product_list1[i]['barcode'] == deleted_product_barcode:
+                        del product_list1[i]
+                        break
+
+                for data in product_list1:
+
+                        sum1 = sum1 + int(data['selling_price'])
+
+                return render(request, 'barcode.html', { 'dashboard': 
+			    									   dashboard, 'user_type': user_type, 'first_name': user_name, 'barcode_data': product_list1, 'barcode_doc': barcode_doc, 'num': number, 'totalMoney' : sum1})
+
+
+            elif request.POST.get("form_type") == 'rm_data2':
+                number1 = '2'
+
+                for data in product_list1:
+
+                    product_name_list.append(data['product_name']) 
+
+                    sum1 = sum1 + int(data['selling_price'])
+
+                    products_dict = {
+	                    "product_name": data['product_name'],
+	                    "cost_price": data['cost_price'],
+	                    "selling_price": data['selling_price'],
+	                    "expiry_date": data['expiry_date'],
+	                    "profit": data['profit'],
+	                    "barcode": data['barcode'],
+	                    "image": data['image'],
+	                    "date_time": datetime.now(),
+                        "user_id": data['user_id'],
+	                }
+                    DB.products_sold.insert_one(products_dict)
+
+                a = len(product_list1)
+
+                return render(request, 'barcode.html', { 'dashboard': 
+			    									   dashboard, 'user_type': user_type, 'first_name': user_name, 'barcode_product_name': product_name_list, 'num': number1, 'scanned_quantity': a, 'scanned_quantity_totalPrice': sum1})
+            
+            else:
+                raise Exception
+            
+        except:
+            messages.warning(request, "Outside Product")
+            num = '0'
+            return render(request, 'barcode.html',  { 'dashboard': 
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'num': num})
+            
+    else:
+        product_list1 = []
+        return render(request, 'barcode.html', { 'dashboard': 
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'num': num})
 
 
 
+    
 
 def employee(request):
     valid = False

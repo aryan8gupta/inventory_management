@@ -39,37 +39,23 @@
               <tr class="head">
                 <th scope="col">Preview</th>
                 <th scope="col">Product Name</th>
-                <th scope="col">Quantity</th>
+                <th scope="col">Expirty Date</th>
                 <th scope="col">Cost Price</th>
                 <th scope="col">Selling Price</th>
-                <th scope="col">Date and Time</th>
+                <th scope="col">Date/Time</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">img</th>
-                <td>Ketchup</td>
-                <td>30</td>
-                <td>₹ 7</td>
-                <td>₹ 10</td>
-                <td>02:00 pm 25/07/2024</td>
-              </tr>
-              <tr>
-                <th scope="row">img</th>
-                <td>Water Bottle</td>
-                <td>10</td>
-                <td>₹ 13</td>
-                <td>₹ 20</td>
-                <td>10:00 am 25/07/2024</td>
-              </tr>
-              <tr>
-                <th scope="row">img</th>
-                <td>Chowmein</td>
-                <td>35</td>
-                <td>₹ 30</td>
-                <td>₹ 40</td>
-                <td>07:00 am 25/07/2024</td>
-              </tr>
+              {% for products in products_doc %}
+                <tr>
+                  <th scope="row"><img src="../assets/img/{{products.image}}" style="height: 7vh; width: 4vw;"></th>
+                  <td>{{products.product_name}}</td>
+                  <td>{{products.expiry_date}}</td>
+                  <td>₹ {{products.cost_price}}</td>
+                  <td>₹ {{products.selling_price}}</td>
+                  <td>{{products.date_time}}</td>
+                </tr>
+              {% endfor %}
             </tbody>
         
         </table>

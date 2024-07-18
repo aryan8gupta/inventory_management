@@ -38,25 +38,30 @@
         <div class="total_products col">
           <h1 style="color: blue;">Total Products</h1>
         </div>
-        <div class="filter col mt-4">
-          <a class="icon" href="#" data-bs-toggle="dropdown" style="font-size: 20px;"><i class="bi bi-three-dots"></i></a>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-            <li class="dropdown-header text-start">
-              <h6>Filter</h6>
-            </li>
+        <div class="overflow-auto">
+          <div class="filter">
+            <button style="border: 0px solid black; background-color: #f6f9ff; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+            <ul>
 
-            <li><a class="dropdown-item" href="#">Today</a></li>
-            <li><a class="dropdown-item" href="#">This Month</a></li>
-            <li><a class="dropdown-item" href="#">This Year</a></li>
-          </ul>
+              <div class="dropdown-menu">
+                <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                <li><a class="dropdown-item" href="#" >Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </div>
+
+            </ul>
+          </div>
         </div>
+        
       </div>
         <table class="table table border border-info">
             <thead>
               <tr class="head">
                 <th scope="col">Preview</th>
                 <th scope="col">Product Name</th>
-                <th scope="col">Quantity</th>
+                <th scope="col">Left Quantity</th>
+                <th scope="col">Bought Quantity</th>
                 <th scope="col">Cost Price</th>
                 <th scope="col">Selling Price</th>
                 <th scope="col">Expiry Date</th>
@@ -69,6 +74,7 @@
                   <th scope="row"><img src="../assets/img/{{products.image}}" style="height: 7vh; width: 4vw;" alt="ketchup"></th>
                   <td>{{products.product_name}}</td>
                   <td>{{products.left_quantity}}</td>
+                  <td>{{products.bought_quantity}}</td>
                   <td>₹ {{products.cost_price}}</td>
                   <td>₹ {{products.selling_price}}</td>
                   <td>{{products.expiry_date}}</td>

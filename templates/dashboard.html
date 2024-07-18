@@ -23,18 +23,19 @@
 
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+              <div class="card info-card sales-card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -58,18 +59,19 @@
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
+              <div class="card info-card revenue-card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -94,18 +96,19 @@
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
 
-              <div class="card info-card customers-card">
+              <div class="card info-card customers-card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -129,19 +132,20 @@
             </div><!-- End Customers Card -->
 
             <!-- Reports -->
-            {% comment %} <div class="col-12">
-              <div class="card">
+            <div class="col-12">
+              <div class="card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -208,22 +212,23 @@
                 </div>
 
               </div>
-            </div><!-- End Reports --> {% endcomment %}
+            </div><!-- End Reports -->
 
             <!-- Recent Sales -->
-            <div class="col-12">
+            <!-- <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -282,22 +287,24 @@
                 </div>
 
               </div>
-            </div><!-- End Recent Sales -->
+            </div> --> 
+            <!-- End Recent Sales --> 
 
             <!-- Top Selling -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -316,39 +323,39 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                        <td>$64</td>
-                        <td class="fw-bold">124</td>
-                        <td>$5,828</td>
+                        <th scope="row"><a href="#"><img src="../assets/img/Small_Water_Bottle.jpg" style="height: 5vh; width: 4vw;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Small Water Bottle</a></td>
+                        <td>₹ 20</td>
+                        <td class="fw-bold">40</td>
+                        <td>₹ 280</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                        <td>$46</td>
-                        <td class="fw-bold">98</td>
-                        <td>$4,508</td>
+                        <th scope="row"><a href="#"><img src="../assets/img/ketchup.jpeg" style="height: 5vh; width: 4vw;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Small Ketchup-1</a></td>
+                        <td>₹ 10</td>
+                        <td class="fw-bold">30</td>
+                        <td>₹ 90</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                        <td>$59</td>
-                        <td class="fw-bold">74</td>
-                        <td>$4,366</td>
+                        <th scope="row"><a href="#"><img src="../assets/img/Chowmein_Packet.jpg" style="height: 5vh; width: 4vw;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Big Chowmein</a></td>
+                        <td>₹ 60</td>
+                        <td class="fw-bold">20</td>
+                        <td>₹ 1200</td>
                       </tr>
                       <tr>
                         <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
                         <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>$32</td>
-                        <td class="fw-bold">63</td>
-                        <td>$2,016</td>
+                        <td>₹ 32</td>
+                        <td class="fw-bold">13</td>
+                        <td>₹ 201</td>
                       </tr>
                       <tr>
                         <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
                         <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>$79</td>
-                        <td class="fw-bold">41</td>
-                        <td>$3,239</td>
+                        <td>₹ 79</td>
+                        <td class="fw-bold">8</td>
+                        <td>₹ 323</td>
                       </tr>
                     </tbody>
                   </table>
@@ -365,17 +372,19 @@
         <div class="col-lg-4">
 
           <!-- Recent Activity -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
+          <div class="card overflow-auto">
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
+            <div class="filter">
+              <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+              <ul>
+
+                <div class="dropdown-menu">
+                  <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                  <li><a class="dropdown-item" id="#" >Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </div>
+
               </ul>
             </div>
 
@@ -439,18 +448,20 @@
 
           {% comment %} <!-- Budget Report -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
+                <div class="filter">
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
+
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
+                  </ul>
+                </div>
 
             <div class="card-body pb-0">
               <h5 class="card-title">Budget Report <span>| This Month</span></h5>
@@ -539,17 +550,19 @@
 
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+              <div class="card info-card sales-card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -573,17 +586,19 @@
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
+              <div class="card info-card revenue-card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -627,20 +642,21 @@
 
             </div><!-- End Customers Card -->
 
-            {% comment %} <!-- Reports -->
+            <!-- Reports -->
             <div class="col-12">
-              <div class="card">
+              <div class="card overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -707,22 +723,23 @@
                 </div>
 
               </div>
-            </div><!-- End Reports --> {% endcomment %}
+            </div><!-- End Reports -->
 
             <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
 
@@ -788,17 +805,19 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+                  <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                  <ul>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <div class="dropdown-menu">
+                      <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                      <li><a class="dropdown-item" id="#" >Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </div>
+
                   </ul>
                 </div>
+
 
                 <div class="card-body pb-0">
                   <h5 class="card-title">Top Selling <span>| Today</span></h5>
@@ -864,17 +883,19 @@
         <div class="col-lg-4">
 
           <!-- Recent Activity -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
+          <div class="card overflow-auto">
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
+            <div class="filter">
+              <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+              <ul>
+
+                <div class="dropdown-menu">
+                  <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                  <li><a class="dropdown-item" id="#" >Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </div>
+
               </ul>
             </div>
 
@@ -937,17 +958,19 @@
           </div><!-- End Recent Activity -->
 
           {% comment %} <!-- Budget Report -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
+          <div class="card overflow-auto">
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
+            <div class="filter">
+              <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+              <ul>
+
+                <div class="dropdown-menu">
+                  <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                  <li><a class="dropdown-item" id="#" >Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </div>
+
               </ul>
             </div>
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path('products-add/', views.products_add),
 
     path('contact/', views.contact_us),
+    path('analytics/', views.analytics),
 
     path('barcode/', views.barcode),
     # ----------------------------------->

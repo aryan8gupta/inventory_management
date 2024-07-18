@@ -21,19 +21,23 @@
         <div class="add_products">
             <h1 style="color: blue;">Products Sold</h1>
         </div>
-        <div class="filter col">
-            <a class="icon" href="#" data-bs-toggle="dropdown" style="font-size: 20px; margin-right: 10px;"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
 
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
+        <div class="overflow-auto">
+          <div class="filter">
+            <button style="border: 0px solid black; background-color: #f6f9ff; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+            <ul>
+
+              <div class="dropdown-menu">
+                <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                <li><a class="dropdown-item" href="#" >Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </div>
+
             </ul>
           </div>
         </div>
+
         <table class="table table border border-info mt-3">
             <thead>
               <tr class="head">

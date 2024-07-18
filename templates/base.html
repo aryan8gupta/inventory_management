@@ -24,6 +24,11 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
+  <!-- Bootstrap JS File -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -150,20 +155,26 @@
     <ul class="sidebar-nav" id="sidebar-nav">
       {% if user_type == 'Shop Owners' %}
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard/">
+        <a class="nav-link" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="/dashboard/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="/employee/">
-          <i class="bi bi-bar-chart"></i><span>Employees</span><i class="ms-auto"></i>
-        </a>
+
+        <!-- <button id="1" onclick="nav_blue_tag(this.id)"> -->
+          <a class="nav-link collapsed" id="1" onclick="navBlueTag(this.id)" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="/employee/">
+            <i class="bi bi-bar-chart"></i><span>Employees</span><i class="ms-auto"></i>
+          </a>
+        <!-- </button> -->
+
       </li><!-- End Employee Data Nav -->
 
+      <!-- <button id="1" onClick="reply_click(this.id)">B1</button> -->
+
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="/products-sold/">
+        <a class="nav-link collapsed" id="2" onclick="navBlueTag(this.id)" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="/products-sold/">
           <i class="bi bi-layout-text-window-reverse"></i><span>Products Sold</span><i class="ms-auto"></i>
         </a>
       </li><!-- End Stock Sold Nav -->
@@ -181,9 +192,9 @@
       </li><!-- End Scanner Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="/analytics/">
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span>Analytics</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
@@ -247,8 +258,21 @@
   {% endblock %}
 
     <!-- Template Main JS File -->
+    <script src="../assets/vendor/apexcharts/apexcharts.min1.js"></script>
     <script src="../assets/js/main.js"></script>
     
+    <script>
+      function nav_blue_tag(a) {
+        console.log("1")
+        console.log(a);
+        console.log("2")
+      }
+      function reply_click(b) {
+        console.log(b);
+      }
+
+    </script>
+
 </body>
     
 </html>

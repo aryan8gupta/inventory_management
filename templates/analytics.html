@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block contain %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <main id="main" class="main">
+        <div class="analytics_heading">
+            <h1 style="color: blue;">Analytics</h1>
+        </div>
+
+        <!-- Reports -->
+        <div class="col-12 mt-4">
+            <div class="card overflow-auto">
+
+              <div class="filter">
+                <button style="border: 0px solid black; background-color: white; float: inline-end; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></button>
+                <ul>
+
+                  <div class="dropdown-menu">
+                    <li class="dropdown-header text-start"><h6>Filter</h6></li>
+                    <li><a class="dropdown-item" id="#" >Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </div>
+
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Reports <span>/Month</span></h5>
+
+                <!-- Bar Chart -->
+                <div id="reportsChart"></div>
+
+                <canvas id="myChart" style="max-height: 400px;"></canvas>
+
+                <script>
+                    var xValues = ["Jan", "Feb", "March", "April", "May", "June"];
+                    var yValues = [15, 24, 44, 49, 55, 80, 90];
+                    var barColors = [
+                      "blue",
+                      "green",
+                      "red",
+                      "yellow",
+                      "lightblue",
+                      "grey"
+                    ];
+                    
+                    new Chart("myChart", {
+                      type: "bar",
+                      data: {
+                        labels: xValues,
+                        datasets: [{
+                          backgroundColor: barColors,
+                          data: yValues
+                        }]
+                      },
+                      options: {
+                        legend: {display: false},
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                          }],
+                        }
+                      }
+                    });
+                </script>
+
+              </div>
+
+            </div>
+        </div><!-- End Reports -->
+
+
+    </main> <!-- End #main -->
+
+{% endblock %}

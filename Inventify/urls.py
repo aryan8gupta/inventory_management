@@ -35,4 +35,6 @@ urlpatterns = [
     path('users-details/', views.users_details),
     path('users-signup/', views.users_signup),
     # ----------------------------------->
+    
+    path('delete/', views.delete),
 ]

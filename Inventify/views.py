@@ -562,8 +562,10 @@ def users_signup(request):
 
                 DB.users.insert_one(users_dict)
 
+                shop_owners_details = list(DB.users.find({'user_type': 'Shop Owners'}))
+
                 return render(request, 'users_details.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+													   dashboard, 'user_type': user_type, 'first_name': user_name,  'shop_owners_details': shop_owners_details})
 
             else:
                 raise Exception
@@ -577,6 +579,16 @@ def users_signup(request):
 													   dashboard, 'user_type': user_type, 'first_name': user_name})
 
 
+
+def delete(request):
+    try:
+        a = request.GET.get('q', '')
+        print(a)
+        DB.shops.delete_one({'shop_contact_number': a})
+        return redirect("/shops/")
+    except:
+        return redirect("/shops/")
+    
     
 
 @csrf_exempt

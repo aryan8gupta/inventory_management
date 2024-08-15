@@ -630,6 +630,6 @@ def login(request):
 
 
 def logout(request):
-	response = HttpResponseRedirect('/')
-	response.delete_cookie("t")
-	return response
+    response = HttpResponseRedirect('/')
+    response.delete_cookie("t")
+    return response

@@ -143,7 +143,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
       {% if user_type == 'Shop Owners' %}
       <li class="nav-item">
-        <a class="nav-link" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="/dashboard/">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="/dashboard/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -205,7 +205,7 @@
       
       {% elif user_type == 'Admin' %}
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard/">
+        <a class="nav-link collapsed" href="/dashboard/">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -230,7 +230,7 @@
       </li><!-- End Profile Page Nav -->
       {% elif user_type == 'Employee' %}
       <li class="nav-item">
-        <a class="nav-link" href="users-profile.html">
+        <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-filter"></i>
           <span>Products Barcode Scanner</span>
         </a>
@@ -249,7 +249,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content border-2 border-dark">
         <div class="modal-body text-center">
-          <h2>Are you sure you want to sign out?</h2>
+          <h2>Are you sure you want to <br> sign out?</h2>
         </div>
         <div class="modal-body text-center">
           <button type="button" class="btn btn-primary mx-2" data-dismiss="modal">Cancel</button>

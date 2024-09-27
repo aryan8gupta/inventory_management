@@ -22,7 +22,7 @@
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style1.css" rel="stylesheet">
 
   <!-- Bootstrap JS File -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -36,12 +36,13 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <div class="logo d-flex align-items-center">
+    <div class="d-flex align-items-center">
+      <div class="logo d-flex">
         <img src="../assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">AiS</span>
       </div>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      {% comment %} <i class="bi bi-list toggle-sidebar-btn"></i> {% endcomment %}
+      <i class="bi bi-arrow-bar-right toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -126,7 +127,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             {% comment %} <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> {% endcomment %}
-            <i class="bi bi-person-circle"></i>
+            <i style = "color:blue; font-size:20px;"  class="bi bi-person-circle"></i>
             <span class="d-none d-md-block ps-2">{{first_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 

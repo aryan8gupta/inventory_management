@@ -354,13 +354,23 @@
   /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
+
   .logo {
     line-height: 1;
   }
-  
   @media (min-width: 1200px) {
+    .toggle-sidebar-btn {
+      display: none;
+    }
+  }
+  @media (min-width: 1000px) {
     .logo {
-      width: 280px;
+      width: 90px;
+    }
+  }
+  @media (max-width: 990px) {
+    .logo {
+      width: 35px;
     }
   }
   
@@ -372,7 +382,7 @@
   .logo span {
     font-size: 26px;
     font-weight: 700;
-    color: #012970;
+    color: #0447ba;
     font-family: "Nunito", sans-serif;
   }
   
@@ -388,10 +398,13 @@
   }
   
   .header .toggle-sidebar-btn {
-    font-size: 32px;
-    padding-left: 10px;
+    border-width: thin;
+    border-radius: 50px;
+    font-size: 20px;
+    padding: 5px;
     cursor: pointer;
     color: #012970;
+    background-color: rgb(245, 245, 247);
   }
   
   .header .search-bar {

@@ -251,7 +251,7 @@ def barcode(request):
     if request.method == 'POST':
         try:
             if request.POST.get("form_type") == 'rm_data1':
-                barcodeInput = request.POST.get("barcodeInput")
+                barcodeInput = request.POST.get("barcodeInput1")
                 number = '1'
 
                 barcode_doc = DB.products.find_one({"barcode": barcodeInput})
@@ -278,6 +278,7 @@ def barcode(request):
                 number = '1'
 
                 barcode_doc = DB.products.find_one({"barcode": deleted_product_barcode})
+                barcode_doc['left_quantity'] = int(barcode_doc['left_quantity']) + 1
 
                 for i in range(len(product_list1)):
                     if product_list1[i]['barcode'] == deleted_product_barcode:
@@ -335,8 +336,6 @@ def barcode(request):
 
 
 
-    
-
 def employee(request):
     valid = False
     data = {}
@@ -348,9 +347,44 @@ def employee(request):
 	
     user_type = data.get('user_type')
     user_name = data.get('first_name')
-    
-    return render(request, 'employee.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+    user_email = data.get('email')
+
+    users_id_doc = DB.users.find_one({'email': user_email})
+
+    employees_doc = list(DB.employees.find({'user_id': users_id_doc['_id']}))
+
+    if request.method == 'POST':
+        print("1")
+        employee_email = request.POST.get("email")
+        employee_firstname = request.POST.get("first_name")
+        employee_lastname = request.POST.get("last_name")
+        employee_mobile = request.POST.get("mobile")
+        employee_age = request.POST.get("age")
+        employee_address = request.POST.get("address")
+        employee_salary = request.POST.get("salary")
+
+        DB.employees.find_one_and_update(
+            {"email": employee_email}, {'$set': 
+                {
+                'first_name': employee_firstname,
+                'last_name': employee_lastname,
+                'mobile': employee_mobile,
+                'age': employee_age,
+                'address': employee_address,
+                'salary': employee_salary,
+                }
+            }
+        )
+        print("2")
+        employees_doc1 = list(DB.employees.find({'user_id': users_id_doc['_id']}))
+        print("3")
+
+        return render(request, 'employee.html', { 'dashboard': 
+												   dashboard, 'user_type': user_type, 'first_name': user_name, 'employees_doc': employees_doc1, 'show': '0'}) 
+            
+    else:
+        return render(request, 'employee.html', { 'dashboard': 
+													dashboard, 'user_type': user_type, 'first_name': user_name, 'employees_doc': employees_doc, 'show': '0'})
 
 
 
@@ -412,15 +446,17 @@ def employee_signup(request):
 
                 DB.employees.insert_one(employee_dict)
                 DB.users.insert_one(user_dict)
+                employees_doc = list(DB.employees.find({'user_id': user_id}))
                 return render(request, 'employee.html', { 'dashboard': 
-													   dashboard, 'user_type': user_type, 'first_name': user_name})
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'employees_doc': employees_doc, 'show': '0'})
 
             else:
                 raise Exception
             
         except:
             messages.warning(request, "Already Registered")
-            return render(request, 'employee_signup.html')
+            return render(request, 'employee_signup.html', { 'dashboard': 
+													   dashboard, 'user_type': user_type, 'first_name': user_name})
             
     else:
         return render(request, 'employee_signup.html', { 'dashboard': 
@@ -583,11 +619,88 @@ def users_signup(request):
 def delete(request):
     try:
         a = request.GET.get('q', '')
-        print(a)
-        DB.shops.delete_one({'shop_contact_number': a})
-        return redirect("/shops/")
+        if '@' in a:
+            DB.employees.delete_one({'email': a})
+            DB.users.delete_one({'email': a})
+            return redirect("/employee/")
+        else:
+            DB.shops.delete_one({'shop_contact_number': a})
+            return redirect("/shops/")
     except:
         return redirect("/shops/")
+    
+
+
+def detail(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    try:
+        a = request.GET.get('q', '')
+        employee_detail = DB.employees.find_one({'email': a})
+        return render(request, 'employee.html', { 'dashboard': 
+													   dashboard, 'user_type': user_type, 'first_name': user_name, 'employee_detail': employee_detail, 'show': '1'})
+    except:
+        return redirect("/employee/")
+    
+
+    
+def update(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+    user_email = data.get('email')
+
+    users_id_doc = DB.users.find_one({'email': user_email})
+
+    if request.method == 'POST':
+        employee_email = request.POST.get("email")
+        employee_firstname = request.POST.get("first_name")
+        employee_lastname = request.POST.get("last_name")
+        employee_mobile = request.POST.get("mobile")
+        employee_age = request.POST.get("age")
+        employee_address = request.POST.get("address")
+        employee_salary = request.POST.get("salary")
+
+        DB.employees.find_one_and_update(
+            {"email": employee_email}, {'$set': 
+                {
+                'first_name': employee_firstname,
+                'last_name': employee_lastname,
+                'mobile': employee_mobile,
+                'age': employee_age,
+                'address': employee_address,
+                'salary': employee_salary,
+                }
+            }
+        )
+        employees_doc1 = list(DB.employees.find({'user_id': users_id_doc['_id']}))
+
+        return render(request, 'employee.html', { 'dashboard': 
+												   dashboard, 'user_type': user_type, 'first_name': user_name, 'employees_doc': employees_doc1, 'show': '0'}) 
+    else:
+        try:
+            a = request.GET.get('q', '')
+            employee_detail = DB.employees.find_one({'email': a})
+            return render(request, 'employee.html', { 'dashboard': 
+	    												   dashboard, 'user_type': user_type, 'first_name': user_name, 'employee_detail': employee_detail, 'show': '2'})
+        except:
+            return redirect("/employee/")
     
     
 

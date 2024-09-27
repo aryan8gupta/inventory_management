@@ -54,6 +54,7 @@
                   <td>{{users.shop_name}}</td>
                   <td>{{users.shop_address}}</td>
                   <td>{{users.mobile}}</td>
+                  {% comment %} <td><a href="/products/?q={{users.email}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Products</button></a></td> {% endcomment %}
                   <td><a href="/products/?q={{users.email}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Products</button></a></td>
                 </tr>
               {% endfor %}

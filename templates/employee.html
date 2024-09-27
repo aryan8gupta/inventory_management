@@ -11,9 +11,66 @@
         .head th {
             color: darkblue;
         }
+        /* .containe{
+          position: absolute;
+        } */
+        .containe h1{
+          margin-top: 20px;
+          color: #0dcaf0;
+        }
+        .contain {
+          display: flex;
+          flex-direction: row;
+          width: 70vw;
+          height: 80vh;
+          margin-left: 30px;
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .row {
+          display: flex;
+          float: left;
+          background-color: whitesmoke;
+          border: 2px solid blue;
+          border-radius: 5px;
+          height: 75vh;
+          width: 40vw;
+          top: 0%;
+          overflow: auto;
+        }
+        .status_button1 {
+          padding: 9px 15px 9px 15px;
+          border-radius: 10px;
+          color: white;
+          background-color: red;
+          border: 0px solid black;
+        }
+        .status_button2 {
+          padding: 9px 15px 9px 15px;
+          border-radius: 10px;
+          color: white;
+          background-color: rgb(221, 221, 15);
+          border: 0px solid black;
+        }
+        .status_button3 {
+          padding: 9px 15px 9px 15px;
+          border-radius: 10px;
+          color: white;
+          background-color: lightgreen;
+          border: 0px solid black;
+        }
+        .detial-sideimg {
+          display: flex;
+          height: 70vh;
+          width: 35vw;
+          opacity: 1;
+        }
     </style>
 
     <main id="main" class="main">
+      {% if show == '0' %}
         <div class="add_employees">
             <a href="/employee-signup/">
                 <button>
@@ -35,20 +92,21 @@
               </tr>
             </thead>
             <tbody>
+              {% for employees in employees_doc %}
               <tr>
-                <th scope="row">Deepak</th>
-                <td>987..</td>
-                <td>40</td>
-                <td>Chotha Bazar, Jawla Nagar</td>
-                <td>₹ 18,000</td>
-                <td><a href="/detail/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Details</button></a></td>
+                <th scope="row">{{employees.first_name}} {{employees.last_name}}</th>
+                <td>{{employees.mobile}}</td>
+                <td>{{employees.age}}</td>
+                <td>{{employees.address}}</td>
+                <td>{{employees.salary}}</td>
+                <td><a href="/detail/?q={{employees.email}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Details</button></a></td>
                 <td>
-                    <a href="/update/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
+                    <a href="/update/?q={{employees.email}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                             <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                         </svg>
                     </button></a>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
+                    <a href="/delete/?q={{employees.email}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -56,51 +114,161 @@
                     </button></a>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">Amit</th>
-                <td>901380..</td>
-                <td>30</td>
-                <td>Shahdara</td>
-                <td>₹ 15,000</td>
-                <td><a href="/detail/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Details</button></a></td>
-                <td>
-                    <a href="/update/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                        </svg>
-                    </button></a>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                      </svg>
-                    </button></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Arjun</th>
-                <td>83..</td>
-                <td>35</td>
-                <td>Greater Noida</td>
-                <td>₹ 12,000</td>
-                <td><a href="/detail/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">View Details</button></a></td>
-                <td>
-                    <a href="/update/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                        </svg>
-                    </button></a>
-                    <a href="/delete/?q={{x.task_id}}"><button style="padding: 9px 15px 9px 15px; border-radius: 10px; color: white; background-color: blue; border: 0px solid black;">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                      </svg>
-                    </button></a>
-                </td>
-              </tr>
+              {% endfor %}
             </tbody>
-        
         </table>
+      {% elif show == '1' %}
+        <div class="containe">
+          <h1 style="color: #0dcaf0; text-align: center;">Employee Details</h1>
+          <div class="contain">
+              <div class="row mx-3 mt-3">
+                  <div class="col-12 mt-2">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder;">Full Name</h5></label>
+                    <h4 style="background-color: white; width: 30vw; padding: 4px;">{{employee_detail.first_name}} {{employee_detail.last_name}}</h4>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="textAreaExample5"><h5 style="font-weight: bolder;">Phone Number</h5></label>
+                    <h4 style="background-color: white; width: 30vw; padding: 4px;">+91 {{employee_detail.mobile}}</h4>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputDate" class="form-label"><h5 style="font-weight: bolder;">Age</h5></label>
+                    <h4 style="background-color: white; width: 30vw; padding: 4px;">{{employee_detail.age}}</h4>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputDate" class="form-label"><h5 style="font-weight: bolder;">Address</h5></label>
+                    <h4 style="background-color: white; width: 30vw; padding: 4px;">{{employee_detail.address}}</h4>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputDate" class="form-label"><h5 style="font-weight: bolder;">Salary</h5></label>
+                    <h4 style="background-color: white; width: 30vw; padding: 4px;">{{employee_detail.salary}}</h4>
+                  </div>
+              </div>
+              <img class="detial-sideimg" src="../assets/img/detial-sideimg.jpeg" alt="error">
+          </div>
+        </div>
+      
+      {% elif show == '2' %}
+        <div class="containe">
+          <h1 style="color: #0dcaf0; text-align: center;">Update Employee Details</h1>
+          <div class="contain">
+              <form action="" method="post" class="row mx-3 mt-3" style="background-color: rgb(237, 227, 247); border: 2px solid blue; border-radius: 5px;">
+                {% csrf_token %}
+                  <div class="col-6 mt-2">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">First Name</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.first_name}}" name="first_name" class="form-control"/>
+                  </div>
+                  <div class="col-6 mt-2">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">Last Name</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.last_name}}" name="last_name" class="form-control"/>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">Phone Number</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.mobile}}" name="mobile" class="form-control"/>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">Age</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.age}}" name="age" class="form-control"/>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">Address</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.address}}" name="address" class="form-control"/>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputTitle" class="form-label"><h5 style="font-weight: bolder; margin-left: 5px;">Salary</h5></label>
+                    <input type="text" id="form3Example1c" value="{{employee_detail.salary}}" name="salary" class="form-control"/>
+                  </div>
+                  <input type="hidden" value="{{employee_detail.email}}" name="email">
+                  <div style="text-align: center;">
+                    <a href="/employee/"><button type="button" class="btn mx-2" style="padding: 6px 10px 6px 10px; font-size: 20px; border-radius: 5px; background-color:  rgb(173, 130, 213); color: white;">Cancel</button></a>
+                    <button type="submit" class="btn" style="padding: 6px 10px 6px 10px; font-size: 20px; background-color: rgb(173, 130, 213); color: white; border-radius: 5px;">Update</button>
+                  </div>
+              </form>
+              <img class="update-sideimg" style="width: 35vw; height: 70vh;" src="../assets/img/update-img.jpeg" alt="error">
+          </div>
+        </div>
+        <!-- <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                  <div class="row mx-5">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                      <div class="d-flex justify-content-center" style="width: 50vw;">
+                        <p class="h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: blue;">Update Details</p>
+                      </div>
+                    
+                      <form action="" method="POST" class="row" style="width: 50vw;">
+                        {% csrf_token %}
+                        {% if messages %}
+                            {% for mes in messages %}
+                            <div class="alert-danger text-danger" id="msgs" role="alert"></div>
+                            <script>
+                              const mytimes1 = setTimeout(function(){
+                                document.getElementById("msgs").innerHTML = '{{mes}}'
+                              });
+                            </script>
+                            {% endfor %}
+                        {% endif %}
+                          
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">First Name</label>
+                            <input type="text" id="form3Example1c" placeholder="{{employee_detail.first_name}}" name="first_name" class="form-control"/>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Last Name</label>
+                            <input type="text" id="form3Example1c" placeholder="{{employee_detail.last_name}}" name="last_name" class="form-control"/>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Phone Number</label>
+                            <input type="tel" id="form3Example1c" placeholder="{{employee_detail.mobile}}" name="mobile" class="form-control"/>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Age</label>
+                            <input type="text" id="form3Example1c" placeholder="{{employee_detail.age}}" name="age" class="form-control"/>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Address</label>
+                            <input type="text" id="form3Example1c" placeholder="{{employee_detail.address}}" name="address" class="form-control"/>
+                          </div>
+                        </div>
+
+                        <div class="col-6 mb-4">
+                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Salary</label>
+                            <input type="text" id="form3Example1c" placeholder="{{employee_detail.salary}}" name="salary" class="form-control"/>
+                          </div>
+                        </div>
+                      
+                        <div class="d-flex justify-content-center mb-3 mb-lg-3">
+                          <button type="submit" class="btn btn-primary btn-lg mt-1">Cancel</button>
+                          <button type="submit" class="btn btn-primary btn-lg mt-1 mx-3">Update</button>
+                        </div>
+                      
+                      </form>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      {% endif %}
+
     </main> <!-- End #main -->
 
 {% endblock %}

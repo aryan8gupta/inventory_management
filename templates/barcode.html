@@ -16,15 +16,28 @@
                     {% endfor %}
                 {% endif %}
                 <h1 style="color: blue;">Scan Items through your device</h1>
-                <label style="height: 85vh; width: 76vw;" for="barcodeInput"><label>
+                <p><span style="font-weight: bolder;">Note: </span>The barcode scanner also works; see the video below or you can select it from here.</p>
+                <label style="height: 70vh; width: 76vw;" for="barcodeInput"><label>
                 <form action="" method="POST" id="myForm">
                     {% csrf_token %}
+                    <select name="barcodeInput1" onchange='if(this.value != 0) { this.form.submit(); }' id="barcodeInput1">
+                      <option value="0">Select an option</option>
+                      <option value="AIS-Chowmein-1">AIS-Chowmein-1</option>
+                      <option value="AIS-SMALL-WaterBottle-1">AIS-SMALL-WaterBottle-1</option>
+                      <option value="AIS-SMALL-KETCHUP-1">AIS-SMALL-KETCHUP-1</option>
+                    </select>
                     <input type="hidden" name="form_type" value="rm_data1" />
-                    <input style="width: 0vw; height: 0vh; float: inline-end;" name="barcodeInput" id="barcodeInput" type="text" autofocus></input>
+                    <!-- <input style="width: 0vw; height: 0vh; float: inline-end;" name="barcodeInput" id="barcodeInput" type="text" autofocus></input> -->
                 </form>
-                <div class="img-cont" style="display: flex; width: 76vw; height: 76vh; text-align: center; justify-content: center; align-items: center;">
-                    <div class="tex " style="width: 10vw; height: 14vh; border-radius: 20%; " name="scanButton" id="scan" autofocus>
+                <div class="img-cont" style="display: flex; width: 76vw; height: 70vh;">
+                    <div class="inside-box1 w-50 h-100 d-flex align-items-center justify-content-center">
                         <i class="bi bi-qr-code-scan" style="font-size: 55px; color: blue;"></i>
+                    </div>
+                    <div class="inside-box2 w-50 h-100 d-flex align-items-center justify-content-center">
+                        <video width="400" height="250" controls>
+                            <source src="../assets/img/barcode-video.mov" type="video/mp4">
+                            <source src="../assets/img/barcode-video.mov" type="video/ogg">
+                        </video>
                     </div>
                 </div>
             </div>
@@ -49,10 +62,16 @@
             </div>
             <div class="container2" id="container2" style="display: none;">
                 <label style="height: 85vh; width: 76vw;" for="barcodeInput1"><label>
-                <form action="" method="POST" id="myForm">
+                <form action="" method="POST" id="myForm" class="my-5">
                     {% csrf_token %}
+                    <select name="barcodeInput1" onchange='if(this.value != 0) { this.form.submit(); }' id="barcodeInput1">
+                        <option value="0">Choose Products</option>
+                        <option value="AIS-Chowmein-1">AIS-Chowmein-1</option>
+                        <option value="AIS-SMALL-WaterBottle-1">AIS-SMALL-WaterBottle-1</option>
+                        <option value="AIS-SMALL-KETCHUP-1">AIS-SMALL-KETCHUP-1</option>
+                    </select>
                     <input type="hidden" name="form_type" value="rm_data1" />
-                    <input style="width: 0vw; height: 0vh; float: inline-end;" name="barcodeInput" id="barcodeInput1" type="text" autofocus></input>
+                    <!-- <input style="width: 0vw; height: 0vh; float: inline-end;" name="barcodeInput" id="barcodeInput1" type="text" autofocus></input> -->
                 </form>
                 <table class="table table border border-info" style="width: 76vw;">
                     <thead>
@@ -181,7 +200,6 @@
             console.log('Scanned barcode: ' + barcodeValue);
             
             str = str + barcodeValue;
-            document.getElementById('output').textContent = 'Scanned barcode: ' + str;
             document.getElementById('barcodeInput').value = str;
             document.getElementById("myForm").submit();
             document.getElementById('barcodeInput').value = '';

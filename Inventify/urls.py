@@ -37,4 +37,6 @@ urlpatterns = [
     # ----------------------------------->
     
     path('delete/', views.delete),
+    path('detail/', views.detail),
+    path('update/', views.update),
 ]

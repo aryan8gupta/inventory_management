@@ -1,9 +1,7 @@
-import json
 from bson import ObjectId
-from django.contrib.auth import authenticate, login, logout;
 from django.contrib import messages;
 from django.shortcuts import render, redirect;
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 import bcrypt 
 import jwt

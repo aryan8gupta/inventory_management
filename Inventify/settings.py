@@ -26,7 +26,7 @@ PUBLIC_KEY = 'Aryan971pass'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['inventory-management-app-hnbvgqaag3g2hyde.centralindia-01.azurewebsites.net']
 
 
 # Application definition

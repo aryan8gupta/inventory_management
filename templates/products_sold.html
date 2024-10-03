@@ -52,7 +52,7 @@
             <tbody>
               {% for products in products_doc %}
                 <tr>
-                  <th scope="row"><img src="../assets/img/{{products.image}}" style="height: 7vh; width: 4vw;"></th>
+                  <th scope="row"><img src="../static/img/{{products.image}}" style="height: 7vh; width: 4vw;"></th>
                   <td>{{products.product_name}}</td>
                   <td>{{products.expiry_date}}</td>
                   <td>₹ {{products.cost_price}}</td>

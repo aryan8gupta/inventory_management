@@ -7,8 +7,8 @@ import sys
 def main():
     """Run administrative tasks."""
 
-    settings_module = 'Inventify.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'Inventify.settings'
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+    # settings_module = 'Inventify.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'Inventify.settings'
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Inventify.deployment')
     
     try:
         from django.core.management import execute_from_command_line

@@ -11,6 +11,7 @@ dnspython==2.6.1
 idna==3.10
 PyJWT==2.9.0
 pymongo==4.8.0
+pytz==2024.2
 requests==2.32.3
 six==1.16.0
 sqlparse==0.2.4

@@ -53,13 +53,11 @@ DB = {
     }
 }
 
-from views import generate_password
-
 def user_signup():
     first_name = 'Aryan'
     last_name = 'Gupta'
     email = 'aryan@gmail.com'
-    password = generate_password('ayan123')
+    password = 'ayan123'
 
     user_dict = {
 	  "login_type": "username-pass",

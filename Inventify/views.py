@@ -9,6 +9,8 @@ from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
 # from Inventify.settings import DB, PUBLIC_KEY
 from Inventify.deployment import DB, PUBLIC_KEY
+from .models import YourModel
+
 
 product_list1 = []
 
@@ -47,7 +49,17 @@ def verify_token(token):
 
 
 def index(request):
+    name = 'Aryan'
+    description = 'Gupta'
+
+    user_dict = {
+	  "name": name,
+	  "description": description,
+	}
+    DB.YourModel.insert_one(user_dict)
+
     return render(request, 'index.html')
+
 def home(request):
     return render(request, 'home.html')
 def analytics(request):

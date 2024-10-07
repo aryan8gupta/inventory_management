@@ -38,7 +38,7 @@ STORAGES = {
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 # DB = CONNECTION.Inventory_Management
 
-DATABASES = {
+DB = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'inventory-management-app-database',  # Name of your database
@@ -52,5 +52,24 @@ DATABASES = {
         },
     }
 }
+
+from views import generate_password
+
+def user_signup():
+    first_name = 'Aryan'
+    last_name = 'Gupta'
+    email = 'aryan@gmail.com'
+    password = generate_password('ayan123')
+
+    user_dict = {
+	  "login_type": "username-pass",
+	  "first_name": first_name,
+	  "last_name": last_name,
+	  "email": email,
+	  "password": password,
+	  "user_type": 'Shop Owners',
+	}
+    DB.users.insert_one(user_dict)
+user_signup()
 
 STATIC_ROOT = BASE_DIR/'staticfiles'

@@ -43,7 +43,7 @@ DB = {
         'ENGINE': 'djongo',
         'NAME': 'inventory-management-app-database',  # Name of your database
         'CLIENT': {
-            'host': 'https://inventory-management-app-server.mongo.cosmos.azure.com:443/',  # Replace with your URI
+            'host': 'mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/',  # Replace with your URI
             'port': 10255,  # Default port for Azure Cosmos DB Mongo API
             'username': 'inventory-management-app-server',  # Your account name
             'password': os.getenv('AZURE_COSMOS_CONNECTIONSTRING'),  # Your primary key

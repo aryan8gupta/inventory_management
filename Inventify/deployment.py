@@ -38,17 +38,18 @@ STORAGES = {
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 # DB = CONNECTION.Inventory_Management
 
-DB = {
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'inventory-management-app-database',  # Name of your database
         'CLIENT': {
-            'host': 'mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/',  # Replace with your URI
+            'host': 'mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/',  # Replace with your URI
             'port': 10255,  # Default port for Azure Cosmos DB Mongo API
             'username': 'inventory-management-app-server',  # Your account name
             'password': os.getenv('Azure_Cosmos_Pswd'),  # Your primary key
             'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1',
+            'authMechanism': 'SCRAM-SHA-256',
+            'tls': True,
         },
     }
 }

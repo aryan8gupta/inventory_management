@@ -83,11 +83,18 @@ WSGI_APPLICATION = 'Inventify.wsgi.application'
 # }
 
 
-import pymongo
+# import pymongo
+# CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
+# DB = CONNECTION.Inventory_Management
 
-CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 
-DB = CONNECTION.Inventory_Management
+from pymongo import MongoClient
+
+connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/"
+
+client = MongoClient(connection_string)
+
+DB = client['inventory-management-app-database']
 
 
 

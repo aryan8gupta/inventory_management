@@ -48,20 +48,30 @@ STORAGES = {
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 # DB = CONNECTION.Inventory_Management
 
-DB = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'inventory-management-app-database',  # Name of your database
-        'CLIENT': {
-            'host': 'mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/',  # Replace with your URI
-            'port': 10255,  # Default port for Azure Cosmos DB Mongo API
-            'username': 'inventory-management-app-server',  # Your account name
-            'password': os.getenv('Azure_Cosmos_Pswd'),  # Your primary key
-            'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-256',
-            'tls': True,
-        },
-    }
-}
+from pymongo import MongoClient
+
+connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/"
+
+client = MongoClient(connection_string)
+
+DB = client['inventory-management-app-database']
+
+
+
+# DB = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'inventory-management-app-database',  # Name of your database
+#         'CLIENT': {
+#             'host': 'mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/',  # Replace with your URI
+#             'port': 10255,  # Default port for Azure Cosmos DB Mongo API
+#             'username': 'inventory-management-app-server',  # Your account name
+#             'password': os.getenv('Azure_Cosmos_Pswd'),  # Your primary key
+#             'authSource': 'admin',
+#             'authMechanism': 'SCRAM-SHA-256',
+#             'tls': True,
+#         },
+#     }
+# }
 
 STATIC_ROOT = BASE_DIR/'staticfiles'

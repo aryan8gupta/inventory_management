@@ -50,7 +50,7 @@ STORAGES = {
 
 from pymongo import MongoClient
 
-connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:10255/"
+connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/"
 
 client = MongoClient(connection_string)
 

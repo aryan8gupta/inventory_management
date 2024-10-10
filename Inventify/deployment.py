@@ -9,6 +9,16 @@ DEBUG = False
 SECRET_KEY = 'django-insecure-$j$mcen!5kw_vxos#q9g)cm!@zflik7k3&nohn@rg_&qx!88hl'
 PUBLIC_KEY = 'Aryan971pass'
 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'Inventify'
+]
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -38,7 +48,7 @@ STORAGES = {
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 # DB = CONNECTION.Inventory_Management
 
-DATABASES = {
+DB = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'inventory-management-app-database',  # Name of your database

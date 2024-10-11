@@ -725,7 +725,7 @@ def login(request):
             logger.info("This is an info message 123143.")
             logger.info(email)
 
-            user_doc = DB.users.find_one({"email": email})
+            user_doc = DB.users.findOne({"email": email})
             logger.info(user_doc)
             if user_doc:
                 # userBytes = login_password.encode('utf-8')

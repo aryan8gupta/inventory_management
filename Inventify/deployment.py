@@ -54,12 +54,12 @@ from pymongo import MongoClient
 connection_string = "mongodb://inventory-management-app-server:{os.getenv('Azure_Cosmos_Pswd')}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@"
 
 client = MongoClient(connection_string)
-
+print(connection_string)
 DB = client['inventory-management-app-database']
 
 
 
-# DB = {
+# DB = {s
 #     'default': {
 #         'ENGINE': 'djongo',
 #         'NAME': 'inventory-management-app-database',  # Name of your database

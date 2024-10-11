@@ -705,6 +705,12 @@ def update(request):
             return redirect("/employee/")
     
     
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 @csrf_exempt
 def login(request):
@@ -713,24 +719,29 @@ def login(request):
             email = request.POST.get("email")
             login_password = request.POST.get("password")
 
+            logger.info("This is an info message 123143.")
+            logger.info(email)
+
             user_doc = DB.users.find_one({"email": email})
+            logger.info(user_doc)
             if user_doc:
-                userBytes = login_password.encode('utf-8')
-                doc_pass = user_doc['password']
-                result = bcrypt.checkpw(userBytes, doc_pass)
+                # userBytes = login_password.encode('utf-8')
+                # doc_pass = user_doc['password']
+                # result = bcrypt.checkpw(userBytes, doc_pass)
+                result = True                     # Remove this line after everything is good.
                 if result:
-                    email = user_doc.get("email")
-                    user_type = user_doc.get("user_type")
-                    first_name = user_doc.get("first_name")
-                    user_dict = {
-                        "email": email,
-                        "user_type": user_type,
-                        "first_name": first_name,
-                    } 
-                    jwt_token = generate_token(user_dict)
+                    # email = user_doc.get("email")
+                    # user_type = user_doc.get("user_type")
+                    # first_name = user_doc.get("first_name")
+                    # user_dict = {
+                    #     "email": email,
+                    #     "user_type": user_type,
+                    #     "first_name": first_name,
+                    # } 
+                    # jwt_token = generate_token(user_dict)
                     response = HttpResponseRedirect('/dashboard')
-                    response.set_cookie("t", jwt_token)
-                    user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
+                    # response.set_cookie("t", jwt_token)
+                    # user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
                     return response
                 else:
                     raise Exception

@@ -48,27 +48,18 @@ STORAGES = {
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
 # DB = CONNECTION.Inventory_Management
 
-from pymongo import MongoClient
-import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
+from pymongo import MongoClient
 
 my_var = os.getenv('Azure_Cosmos_Pswd', 'Default Value')
 # connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/"
 connection_string = "mongodb://inventory-management-app-server:{my_var}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@"
 
-
-logger.info("This is an info message.")
-logger.info(connection_string)
-
 client = MongoClient(connection_string)
-logger.info("This is 123412424.")
-logger.info(client)
 
 DB = client['inventory-management-app-database']
-logger.info("This is ---------9q3240.")
+
 
 
 

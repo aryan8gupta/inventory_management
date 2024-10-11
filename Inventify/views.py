@@ -715,8 +715,11 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def login(request):
     try:
+        logger.info("Hello everyone")
         if request.method == 'POST':
+            logger.info("Hi welcome to login page with me.")
             email = request.POST.get("email")
+            logger.info("Hey whats upp")
             login_password = request.POST.get("password")
 
             logger.info("This is an info message 123143.")
@@ -751,6 +754,7 @@ def login(request):
         return render(request, 'login.html', {})
     except:
         messages.warning(request, "Invalid ID or Password")
+        logger.error("Failed System of logging in .")
         return render(request, 'login.html')
 
 

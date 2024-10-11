@@ -68,6 +68,7 @@ logger.info("This is 123412424.")
 logger.info(client)
 
 DB = client['inventory-management-app-database']
+logger.info("This is ---------9q3240.")
 
 
 

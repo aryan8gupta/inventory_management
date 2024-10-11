@@ -49,16 +49,6 @@ def verify_token(token):
 
 
 def index(request):
-    name = 'Aryan'
-    description = 'Gupta'
-
-    user_dict = {
-      "_id": "7",
-	  "name": name,
-	  "description": description,
-	}
-    DB.employees.insertOne(user_dict)
-
     return render(request, 'index.html')
 
 def home(request):

@@ -53,10 +53,11 @@ def index(request):
     description = 'Gupta'
 
     user_dict = {
+      "_id": "7",
 	  "name": name,
 	  "description": description,
 	}
-    DB.employees.insert_one(user_dict)
+    DB.employees.insertOne(user_dict)
 
     return render(request, 'index.html')
 

@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'Inventify.wsgi.application'
 
 from pymongo import MongoClient
 
-connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/"
+connection_string = "https://inventory-management-app-server.mongo.cosmos.azure.com:443/"
 
 client = MongoClient(connection_string)
 

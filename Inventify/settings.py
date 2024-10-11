@@ -90,7 +90,8 @@ WSGI_APPLICATION = 'Inventify.wsgi.application'
 
 from pymongo import MongoClient
 
-connection_string = "https://inventory-management-app-server.mongo.cosmos.azure.com:443/"
+# connection_string = "mongodb://inventory-management-app-server.mongo.cosmos.azure.com:443/"
+connection_string = "mongodb://inventory-management-app-server:{os.getenv('Azure_Cosmos_Pswd')}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@"
 
 client = MongoClient(connection_string)
 

@@ -7,8 +7,8 @@ import bcrypt
 import jwt
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
-# from Inventify.settings import DB, PUBLIC_KEY
-from Inventify.deployment import DB, PUBLIC_KEY
+from Inventify.settings import DB, PUBLIC_KEY
+# from Inventify.deployment import DB, PUBLIC_KEY
 from .models import YourModel
 
 
@@ -718,28 +718,25 @@ def login(request):
         if request.method == 'POST':
             email = request.POST.get("email")
             login_password = request.POST.get("password")
-            return HttpResponseRedirect('/dashboard')
 
-            # user_doc = DB.users.find_one({"email": email})
-            user_doc = DB.users.find_one()
+            user_doc = DB.users.find_one({"email": email})
             if user_doc:
-                # userBytes = login_password.encode('utf-8')
-                # doc_pass = user_doc['password']
-                # result = bcrypt.checkpw(userBytes, doc_pass)
-                result = True                     # Remove this line after everything is good.
+                userBytes = login_password.encode('utf-8')
+                doc_pass = user_doc['password']
+                result = bcrypt.checkpw(userBytes, doc_pass)
                 if result:
-                    # email = user_doc.get("email")
-                    # user_type = user_doc.get("user_type")
-                    # first_name = user_doc.get("first_name")
-                    # user_dict = {
-                    #     "email": email,
-                    #     "user_type": user_type,
-                    #     "first_name": first_name,
-                    # } 
-                    # jwt_token = generate_token(user_dict)
+                    email = user_doc.get("email")
+                    user_type = user_doc.get("user_type")
+                    first_name = user_doc.get("first_name")
+                    user_dict = {
+                        "email": email,
+                        "user_type": user_type,
+                        "first_name": first_name,
+                    } 
+                    jwt_token = generate_token(user_dict)
                     response = HttpResponseRedirect('/dashboard')
-                    # response.set_cookie("t", jwt_token)
-                    # user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
+                    response.set_cookie("t", jwt_token)
+                    user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
                     return response
                 else:
                     raise Exception

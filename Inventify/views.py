@@ -715,18 +715,12 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def login(request):
     try:
-        logger.info("Hello everyone")
         if request.method == 'POST':
-            logger.info("Hi welcome to login page with me.")
             email = request.POST.get("email")
-            logger.info("Hey whats upp")
             login_password = request.POST.get("password")
 
-            logger.info("This is an info message 123143.")
-            logger.info(email)
-
-            user_doc = DB.users.findOne({"email": email})
-            logger.info(user_doc)
+            # user_doc = DB.users.find_one({"email": email})
+            user_doc = DB.users.find_one()
             if user_doc:
                 # userBytes = login_password.encode('utf-8')
                 # doc_pass = user_doc['password']

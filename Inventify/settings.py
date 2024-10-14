@@ -84,9 +84,16 @@ WSGI_APPLICATION = 'Inventify.wsgi.application'
 
 
 import pymongo
-CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
-DB = CONNECTION.Inventory_Management
-print(CONNECTION)
+# CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
+# DB = CONNECTION.Inventory_Management
+
+
+my_var = os.getenv('Azure_Cosmos_Pswd', 'Default Value')
+
+CONNECTION = pymongo.MongoClient('mongodb://inventory-management-app-server:{my_var}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@', serverSelectionTimeoutMS=30000, retryWrites=True)
+
+DB = CONNECTION['inventory-management-app-database']
+
 
 
 

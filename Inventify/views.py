@@ -7,8 +7,8 @@ import bcrypt
 import jwt
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
-# from Inventify.settings import DB, PUBLIC_KEY
-from Inventify.deployment import DB, PUBLIC_KEY
+from Inventify.settings import DB, PUBLIC_KEY
+# from Inventify.deployment import DB, PUBLIC_KEY
 from .models import YourModel
 
 

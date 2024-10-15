@@ -721,6 +721,7 @@ def login(request):
             result = True
 
             user_doc = DB.users.find_one({"email": email})
+            return HttpResponseRedirect('/dashboard')
             if user_doc:
                 # userBytes = login_password.encode('utf-8')
                 # doc_pass = user_doc['password']

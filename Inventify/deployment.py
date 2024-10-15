@@ -50,7 +50,7 @@ STORAGES = {
 
 
 
-my_var = os.getenv('Azure_Cosmos_Pswd', 'Default Value')
+my_var = os.getenv('Azure_Cosmos_Password', 'Default Value')
 
 CONNECTION = pymongo.MongoClient('mongodb://inventory-management-app-server:{my_var}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@', serverSelectionTimeoutMS=30000, retryWrites=True)
 

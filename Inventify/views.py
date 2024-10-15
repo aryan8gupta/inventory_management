@@ -718,9 +718,9 @@ def login(request):
         if request.method == 'POST':
             email = request.POST.get("email")
             login_password = request.POST.get("password")
-            result = True
 
-            user_doc = DB.users.find_one({"email": email})
+            # user_doc = DB.users.find_one({"email": email})
+            user_doc = DB.users.find_one()
             return HttpResponseRedirect('/dashboard')
             if user_doc:
                 # userBytes = login_password.encode('utf-8')

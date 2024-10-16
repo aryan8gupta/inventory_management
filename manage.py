@@ -7,7 +7,7 @@ import sys
 def main():
     """Run administrative tasks."""
 
-    settings_module = 'Inventify.deployment' if 'https://inventory-management-app-hnbvgqaag3g2hyde.centralindia-01.azurewebsites.net/' in os.environ else 'Inventify.settings'
+    settings_module = 'Inventify.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'Inventify.settings'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
     
     try:

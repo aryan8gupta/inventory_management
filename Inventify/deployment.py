@@ -9,15 +9,6 @@ DEBUG = False
 SECRET_KEY = 'django-insecure-$j$mcen!5kw_vxos#q9g)cm!@zflik7k3&nohn@rg_&qx!88hl'
 PUBLIC_KEY = 'Aryan971pass'
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'Inventify'
-]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -48,22 +39,6 @@ STORAGES = {
 
 ROOT_URLCONF = 'Inventify.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, "templates"],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'Inventify.wsgi.application'
 
     
@@ -76,6 +51,8 @@ logger = logging.getLogger(__name__)
 my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
 
 CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
+logger.info(my_var)
+logger.info(CONNECTION)
 
 DB = CONNECTION['inventory-management-app-database']
 

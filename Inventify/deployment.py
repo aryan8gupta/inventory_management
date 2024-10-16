@@ -45,19 +45,12 @@ STORAGES = {
     },
 }
 
-# CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
-# DB = CONNECTION.Inventory_Management
-
-
 
 my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
 
 CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
 
 DB = CONNECTION['inventory-management-app-database']
-
-
-
 
 
 # DB = {s
@@ -76,4 +69,10 @@ DB = CONNECTION['inventory-management-app-database']
 #     }
 # }
 
-STATIC_ROOT = BASE_DIR/'staticfiles'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

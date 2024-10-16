@@ -66,13 +66,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Inventify.wsgi.application'
 
+    
+import logging
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
 
 CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
 
 DB = CONNECTION['inventory-management-app-database']
+
+logger.info("HELLO")
 
 
 # DB = {s

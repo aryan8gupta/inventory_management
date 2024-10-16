@@ -84,6 +84,12 @@ WSGI_APPLICATION = 'Inventify.wsgi.application'
 #     }
 # }
 
+    
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 import pymongo
 # CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
@@ -97,7 +103,7 @@ CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWr
 
 DB = CONNECTION['inventory-management-app-database']
 
-
+logger.info("BYE")
 
 
 

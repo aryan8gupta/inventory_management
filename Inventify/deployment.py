@@ -51,10 +51,9 @@ logger = logging.getLogger(__name__)
 my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
 
 CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
-logger.info(my_var)
 logger.info(CONNECTION)
 
-DB = CONNECTION['inventory-management-app-database']
+DB = CONNECTION['inventory-management']
 
 logger.info("HELLO")
 

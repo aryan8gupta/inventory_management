@@ -48,14 +48,23 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
+my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value-1')
+my_var1 = os.getenv('Azure_Cosmos_Password', 'Default Value-2')
+my_var2 = os.getenv('SCM_DO_BUILD_DURING_DEPLOYMENT', 'Default Value-3')
 
 CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
 logger.info(CONNECTION)
 
 DB = CONNECTION['inventory-management']
 
+logger.info("BYEESESESSESESESES-123456")
+
+logger.info(my_var)
+logger.info(my_var1)
+logger.info(my_var2)
+
 logger.info("HELLO")
+logger.info("HI-123456")
 
 
 # DB = {s

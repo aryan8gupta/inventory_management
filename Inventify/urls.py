@@ -21,12 +21,23 @@ urlpatterns = [
     
     path('products/', views.products),
     path('products-sold/', views.products_sold),
+    
     path('products-add/', views.products_add),
+
+    path('add-products/', views.add_products),
+    path('upload', views.upload_image),
 
     path('contact/', views.contact_us),
     path('analytics/', views.analytics),
 
     path('barcode/', views.barcode),
+
+    path('exchange/', views.exchange),
+    path('sales/', views.sales),
+
+    # For scanning QR-codes
+    path('scan/', views.scan_qr, name='scan_qr'),
+    
     # ----------------------------------->
     
     # Admin ----------------------->

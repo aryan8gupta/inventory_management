@@ -26,7 +26,7 @@ CSRF_TRUSTED_ORIGINS = ['https://inventory-management-app-hnbvgqaag3g2hyde.centr
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -92,17 +92,17 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 import pymongo
-# CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
-# DB = CONNECTION.Inventory_Management
+CONNECTION = pymongo.MongoClient('mongodb://localhost:27017')
+DB = CONNECTION.Inventory_Management
 
 
-my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
+# my_var = os.getenv('Azure_Cosmos_Conn', 'Default Value')
 
-# CONNECTION = pymongo.MongoClient('mongodb://inventory-management-app-server:{my_var}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@', serverSelectionTimeoutMS=30000, retryWrites=True)
-CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
-logger.info(CONNECTION)
+# # CONNECTION = pymongo.MongoClient('mongodb://inventory-management-app-server:{my_var}@inventory-management-app-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@inventory-management-app-server@', serverSelectionTimeoutMS=30000, retryWrites=True)
+# CONNECTION = pymongo.MongoClient(my_var, serverSelectionTimeoutMS=30000, retryWrites=True)
+# logger.info(CONNECTION)
 
-DB = CONNECTION['inventory-management']
+# DB = CONNECTION['inventory-management']
 
 
 
@@ -140,14 +140,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
-# [
-#     BASE_DIR, "/static/"
-# ]
+# RUN for Locally :- --------->
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+# ------------------------------>
+
+# Run During Production  =------------------------------->
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static")
+# ]
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# ----------------------------------------------------->
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

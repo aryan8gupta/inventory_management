@@ -7,10 +7,82 @@ import bcrypt
 import jwt
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
-# from Inventify.settings import DB, PUBLIC_KEY
-from Inventify.deployment import DB, PUBLIC_KEY
+from Inventify.settings import DB, PUBLIC_KEY
+# from Inventify.deployment import DB, PUBLIC_KEY
 from .models import YourModel
 
+import requests
+import base64
+import time
+from django.http import JsonResponse
+
+
+# QR-Code Generating / Template----------------------------------------------------------->
+import qrcode
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import mm
+
+LABEL_WIDTH_MM = 50
+LABEL_HEIGHT_MM = 38
+PAGE_WIDTH_MM = 210
+PAGE_HEIGHT_MM = 297
+TOP_MARGIN_MM = 10
+LEFT_MARGIN_MM = 10
+GAP_MM = 0
+
+def mm_to_pt(mm_val):
+    return mm_val * mm
+
+def generate_qr_code(data, filename="temp_qr.png"):
+    qr = qrcode.make(data)
+    qr.save(filename)
+    return filename
+
+def create_vertical_qr_pdf(data_list, output_file="vertical_qr_labels.pdf"):
+    c = canvas.Canvas(output_file, pagesize=(mm_to_pt(PAGE_WIDTH_MM), mm_to_pt(PAGE_HEIGHT_MM)))
+
+    label_width = mm_to_pt(LABEL_WIDTH_MM)
+    label_height = mm_to_pt(LABEL_HEIGHT_MM)
+    x_qr = mm_to_pt(LEFT_MARGIN_MM + 30)  # QR shifted right to make space for text
+    x_text = mm_to_pt(LEFT_MARGIN_MM)     # Text on left
+    y = mm_to_pt(PAGE_HEIGHT_MM - TOP_MARGIN_MM - LABEL_HEIGHT_MM)
+
+    for i, item in enumerate(data_list):
+        product_name = item.get("name", f"Product {i+1}")
+        qr_data = item.get("url", "")
+
+        qr_img = generate_qr_code(qr_data)
+        c.drawImage(qr_img, x_qr, y, width=label_width, height=label_height)
+
+        # Draw product name text
+        c.setFont("Helvetica", 10)
+        c.drawString(x_text, y + label_height / 2, product_name)
+
+        y -= (label_height + mm_to_pt(GAP_MM))
+
+        if y < mm_to_pt(10):
+            c.showPage()
+            y = mm_to_pt(PAGE_HEIGHT_MM - TOP_MARGIN_MM - LABEL_HEIGHT_MM)
+
+    c.save()
+    print(f"PDF saved: {output_file}")
+
+# Example with product names
+data_list = [
+    {"name": "Black T-Shirt", "url": "https://example.com/item/1"},
+    {"name": "Denim Jeans", "url": "https://example.com/item/2"},
+    {"name": "Green Kurti", "url": "https://example.com/item/3"},
+    {"name": "Formal Shirt", "url": "https://example.com/item/4"},
+    # Add more...
+]
+
+# Uncomment this to create pdf.
+# create_vertical_qr_pdf(data_list)
+# --------------------------------------------------------------------->
+
+
+PINCEL_API_URL = "https://pincel.app/api/clothes-swap"
+PINCEL_API_KEY = "d7982ad0-58e5-4899-b0db-e063a8e70448"
 
 product_list1 = []
 
@@ -53,6 +125,155 @@ def index(request):
 
 def home(request):
     return render(request, 'home.html')
+
+
+def exchange(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    return render(request, 'exchange.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
+
+
+def sales(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    return render(request, 'sales.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
+
+
+
+def scan_qr(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    return render(request, 'scan.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
+
+
+
+@csrf_exempt
+def upload_image(request):
+    if request.method == 'POST':
+        garment_image = request.FILES.get('garment_image')
+        cloth_image = request.FILES.get('cloth_image')
+
+        if not garment_image or not cloth_image:
+            return JsonResponse({"error": "Both images are required."})
+
+        # Send images to Pincel API
+        # files = {
+        #     'garment_image': (garment_image.name, garment_image.read(), garment_image.content_type),
+        #     'cloth_image': (cloth_image.name, cloth_image.read(), cloth_image.content_type),
+        #     "category": "upper_body",
+        #     "action": "startPrediction"
+        # }
+
+        def encode_image(image):
+            return base64.b64encode(image.read()).decode('utf-8')
+
+        model_image_base64 = encode_image(garment_image)
+        garment_image_base64 = encode_image(cloth_image)
+
+        headers = {
+            'X-API-Key': PINCEL_API_KEY,
+            'Content-Type': 'application/json',
+        }
+
+        payload1 = {
+            "model_image": f"data:image/jpeg;base64,{model_image_base64}",
+            "garment_image": f"data:image/jpeg;base64,{garment_image_base64}",
+            "category": "upper_body", 
+            "action": "startPrediction"
+        }
+
+        try:
+            response1 = requests.post(PINCEL_API_URL, json=payload1, headers=headers)
+            data1 = response1.json()
+            print(data1)
+
+            payload2 = {
+                "predictionId": data1['prediction'],
+                "action": "getPrediction"
+            }
+            while True:
+                response2 = requests.post(PINCEL_API_URL, json=payload2, headers=headers)
+                data2 = response2.json()
+                print(data2)
+
+                if response2.status_code == 200:
+                    status = data2.get('status')
+
+                    if status == 'succeeded':
+                        print("✅ Prediction completed! Image URL:", data2.get('output'))
+                        return JsonResponse(data2)
+                    elif status == 'failed':
+                        print("❗ Prediction failed:", data2.get('error', 'Unknown error'))
+                        return None
+                    else:
+                        print("⏳ Processing... Checking again in 5 seconds.")
+                else:
+                    print("❗ Error:", data2.get('error', 'Unknown error'))
+                    return None
+
+                time.sleep(5)  # Wait 5 seconds before checking again
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)})
+
+    return JsonResponse({"error": "Invalid request"})
+
+
+@csrf_exempt
+def add_products(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+    plan = "premium"
+
+    # if request.method == 'POST':
+    #     try:
+    #         if request.POST.get("form_type") == 'add1':
+    #             original_image = request.POST.get("original_image")
+    #             print(original_image)
+    #     except:
+    #         return render(request, 'add_products.html',  { 'dashboard': 
+	# 												   dashboard, 'user_type': user_type, 'first_name': user_name})
+
+            
+
+    return render(request, 'add_products.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name, 'plan': plan})
+
+
 def analytics(request):
     valid = False
     data = {}
@@ -719,26 +940,25 @@ def login(request):
             email = request.POST.get("email")
             login_password = request.POST.get("password")
 
-            # user_doc = DB.users.find_one({"email": email})
-            user_doc = DB.users.find_one()
-            return HttpResponseRedirect('/dashboard')
+            user_doc = DB.users.find_one({"email": email})
+            # user_doc = DB.users.find_one()
             if user_doc:
-                # userBytes = login_password.encode('utf-8')
-                # doc_pass = user_doc['password']
-                # result = bcrypt.checkpw(userBytes, doc_pass)
+                userBytes = login_password.encode('utf-8')
+                doc_pass = user_doc['password']
+                result = bcrypt.checkpw(userBytes, doc_pass)
                 if result:
-                    # email = user_doc.get("email")
-                    # user_type = user_doc.get("user_type")
-                    # first_name = user_doc.get("first_name")
-                    # user_dict = {
-                    #     "email": email,
-                    #     "user_type": user_type,
-                    #     "first_name": first_name,
-                    # } 
-                    # jwt_token = generate_token(user_dict)
+                    email = user_doc.get("email")
+                    user_type = user_doc.get("user_type")
+                    first_name = user_doc.get("first_name")
+                    user_dict = {
+                        "email": email,
+                        "user_type": user_type,
+                        "first_name": first_name,
+                    } 
+                    jwt_token = generate_token(user_dict)
                     response = HttpResponseRedirect('/dashboard')
-                    # response.set_cookie("t", jwt_token)
-                    # user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
+                    response.set_cookie("t", jwt_token)
+                    user_doc = DB.users.find_one_and_update({"email": email}, {"$set":{"token":jwt_token}})
                     return response
                 else:
                     raise Exception

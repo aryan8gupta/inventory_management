@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block contain %}
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    #reader {
+      width: 300px;
+      margin: auto;
+    }
+  </style>
+  <main id="main" class="main">
+    <div class="con row">
+        <h2>Scan QR Code</h2>
+        <div id="reader"></div>
+    <div class="con row">
+  </main>
+
+  <script>
+    // const allowedDomain = "yourdomain.com"; // ✅ Replace with your actual domain
+
+    function onScanSuccess(decodedText, decodedResult) {
+      try {
+        const url = new URL(decodedText);
+        window.location.href = decodedText;
+
+        // if (url.hostname.includes(allowedDomain)) {
+        //   // Redirect if the scanned URL belongs to your domain
+        //   window.location.href = decodedText;
+        // } else {
+        //   alert("Invalid QR Code. Not allowed.");
+        // }
+        
+      } catch (e) {
+        alert("Invalid QR code format.");
+      }
+
+      html5QrcodeScanner.clear();
+    }
+
+    const html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: 250 }
+    );
+    html5QrcodeScanner.render(onScanSuccess);
+  </script>
+
+</body>
+</html>
+{% endblock %}

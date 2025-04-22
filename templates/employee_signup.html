@@ -1,101 +1,166 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Registration</title>
+  
+  <link rel="stylesheet" href="../static/css/employees.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-{% block contain %}
-    <main id="main" class="main">
-        <div class="container h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-12 col-xl-11">
-              <div class="card text-black" style="border-radius: 25px;">
-                <div class="card-body p-md-5">
-                  <div class="row mx-5">
-                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                      <div class="d-flex justify-content-center" style="width: 50vw;">
-                        <p class="h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: blue;">Sign up</p>
-                      </div>
-                    
-                      <form action="" method="POST" class="row" style="width: 50vw;">
-                        {% csrf_token %}
-                        {% if messages %}
-                            {% for mes in messages %}
-                            <div class="alert-danger text-danger" id="msg" role="alert"></div>
-                            <script>
-                              const mytimes = setTimeout(function(){
-                                document.getElementById("msg").innerHTML = '{{mes}}'
-                              });
-                            </script>
-                            {% endfor %}
-                        {% endif %}
-                    
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">First Name</label>
-                            <input type="text" id="form3Example1c" name="first_name" class="form-control" required/>
-                          </div>
-                        </div>
+</head>
+<body>
 
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">Last Name</label>
-                            <input type="text" id="form3Example1c" name="last_name" class="form-control" required/>
-                          </div>
-                        </div>
+  <!-- Main Content ------------------------------------------------->
 
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">Phone Number</label>
-                            <input type="tel" id="form3Example1c" name="mobile" class="form-control" required/>
-                          </div>
-                        </div>
+  <div class="app-container registration-page">
 
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">Age</label>
-                            <input type="text" id="form3Example1c" name="age" class="form-control" required/>
-                          </div>
-                        </div>
+    <main class="registration-content">
+      <div class="registration-form-container">
+        <h1>Employee Registration</h1>
+        <p class="form-subtitle">Complete the form below to create your employee account</p>
 
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">Address</label>
-                            <input type="text" id="form3Example1c" name="address" class="form-control" required/>
-                          </div>
-                        </div>
+        <form id="employeeRegistrationForm" class="registration-form">
+          <!-- Personal Information -->
+          <div class="form-section">
+            <h2>Personal Information</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" placeholder="Enter first name" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" placeholder="Enter last name" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <!-- Date of Birth field -->
+              <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <div class="date-input-container">
+                  <input type="text" id="dateOfBirth" placeholder="MM/DD/YYYY" readonly required>
+                  <button type="button" class="calendar-btn" id="dateOfBirthBtn">
+                    <i class="fas fa-calendar"></i>
+                  </button>
+                </div>
+                <div id="dateOfBirthPicker" class="datepicker"></div>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-                        <div class="col-6 mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example1c">Salary</label>
-                            <input type="text" id="form3Example1c" name="salary" class="form-control" required/>
-                          </div>
-                        </div>
-                    
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example3c">Your Email</label>
-                            <input type="email" id="form3Example3c" name="email" class="form-control" required/>
-                          </div>
-                        </div>
-                    
-                        <div class="d-flex flex-row align-items-center mb-5">
-                          <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="form3Example4c">Password</label>
-                            <input type="password" id="form3Example4c" name="password" class="form-control" required/>
-                          </div>
-                        </div>
-                    
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-3">
-                          <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg mt-1">Register</button>
-                        </div>
-                    
-                      </form>
-                  
-                    </div>
-                  </div>
+          <!-- Employment Details -->
+          <div class="form-section">
+            <h2>Employment Details</h2>
+            <div class="form-group">
+              <label for="jobTitle">Job Title/Designation</label>
+              <select id="jobTitle" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="store_manager">Store Manager</option>
+                <option value="sales_associate">Sales Associate</option>
+                <option value="inventory_manager">Inventory Manager</option>
+                <option value="cashier">Cashier</option>
+                <option value="tailor">Tailor</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <!-- Date of Joining field -->
+              <div class="form-group">
+                <label for="dateOfJoining">Date of Joining</label>
+                <div class="date-input-container">
+                  <input type="text" id="dateOfJoining" placeholder="MM/DD/YYYY" readonly required>
+                  <button type="button" class="calendar-btn" id="dateOfJoiningBtn">
+                    <i class="fas fa-calendar"></i>
+                  </button>
+                </div>
+                <div id="dateOfJoiningPicker" class="datepicker"></div>
+              </div>
+              <div class="form-group">
+                <label for="salary">Salary</label>
+                <div class="salary-input">
+                  <span class="currency-symbol">$</span>
+                  <input type="text" id="salary" placeholder="Enter amount" required>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-    </main> <!-- End #main -->
+          <!-- Contact & Security -->
+          <div class="form-section">
+            <h2>Contact & Security</h2>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number</label>
+              <div class="input-with-button">
+                <input type="tel" id="phoneNumber" placeholder="Enter phone number" required>
+                <button type="button" id="verifyPhoneBtn" class="verify-btn">Verify</button>
+              </div>
+              <!-- Phone OTP container with improved structure -->
+              <div id="phoneOtpContainer" class="otp-container hidden">
+                <input type="text" id="phoneOtp" placeholder="Enter OTP" maxlength="6">
+                <p class="otp-timer">Expires in: <span id="phoneOtpTimer">02:00</span></p>
+                <div class="otp-actions">
+                  <button type="button" id="verifyPhoneOtpBtn" class="verify-otp-btn">Verify OTP</button>
+                  <button type="button" id="resendPhoneOtpBtn" class="resend-otp-btn" disabled>
+                    Resend OTP
+                    <span id="resendCountdown" class="resend-countdown"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="alternatePhone">Alternate Mobile Number (Optional)</label>
+              <input type="tel" id="alternatePhone" placeholder="Enter alternate number">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input">
+                  <input type="password" id="password" placeholder="Create password" required>
+                  <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
+                </div>
+                <div class="password-requirements">
+                  <div class="password-requirement" id="req-alphanumeric">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Must contain letters and numbers</span>
+                  </div>
+                  <div class="password-requirement" id="req-length">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Must be 10-20 characters</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-input">
+                  <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                  <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
+                </div>
+                <div class="password-requirement" id="req-match">
+                  <i class="fas fa-times-circle"></i>
+                  <span>Passwords must match</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-{% endblock %}
+          <button type="submit" id="createEmployeeAccountBtn" class="submit-btn">Create Employee Account</button>
+          <p class="terms-text">By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+          <p class="login-link">Already have an account? <a href="#">Login</a></p>
+        </form>
+      </div>
+    </main> 
+
+  </div> 
+  <script src="../static/js/employee-registration.js"></script>
+    
+    <!-- End #main -->
+

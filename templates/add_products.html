@@ -31,6 +31,72 @@
             max-width: 100%;
             margin-top: 10px;
         }
+        .sub-category-grid,
+        .final-category-grid,
+        .final-sub-category-grid,
+        .images-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .sub-category-grid .category-item {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        
+        .final-category-grid .category-item {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        
+        .final-sub-category-grid .category-item {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .category-item, .image-item {
+            min-width: 120px;
+            padding: 10px;
+            background: #f1f1f1;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+            /* Active Image */
+        .image-item.active {
+            border: 3px solid #8A4AF3;
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+        .category-item.active {
+            /* border: 2px solid #0056b3;  darker border */
+            background-color: #8A4AF3;
+            color: white;
+            border-bottom: none;
+        }
+        .upload-image-button {
+            background-color: black;
+            color: rgb(248, 233, 99);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .upload-image-button:hover {
+            background-color: #8A4AF3;
+            color: white;
+        }
+
     </style>
 
     <main id="main" class="main">
@@ -52,8 +118,8 @@
                       </div>
                       <div class="upload-controls">
                           <div class="file-upload">
-                              <input type="file" id="product-image" accept="image/*">
-                              <label for="product-image" class="btn primary-btn">
+                              <input type="file" name="product-image" id="product-image" style="display: none;" accept="image/*">
+                              <label for="product-image" class="upload-image-button">
                                   <i class="fas fa-cloud-upload-alt"></i> Upload Product Image
                               </label>
                           </div>
@@ -64,70 +130,57 @@
         </section>
 
         <section class="category-section">
-          <div class="card">
-              <div class="card-header">
-                  <h2>Select Product Category</h2>
-              </div>
-              <div class="card-body">
-                  <div class="category-grid">
-                      <div class="category-item active">
-                          <i class="fas fa-clock"></i>
-                          <span>Watches</span>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Select Product Category</h2>
+                </div>
+                <div class="card-body">
+
+                    <!-- <div class="category-grid" id="category"></div> -->
+                    <div class="category-grid">
+                        <div class="category-item" data-gender="Men">
+                            <i class="fas fa-mars"></i>
+                            <span>Men</span>
+                        </div>
+                        <div class="category-item" data-gender="Women">
+                            <i class="fas fa-venus"></i>
+                            <span>Women</span>
+                        </div>
+                    </div>
+
+                    <div class="sub-category-grid" id="subcategory">
+                        <!-- Subcategories (Half Sleeve T-Shirts, etc.) -->
+                    </div>
+                    <div class="final-category-grid" id="finalcategory">
+                        <!-- Final categories (Polo T-shirt etc.) -->
+                    </div>
+                    <div class="final-sub-category-grid">
+                        <!-- Polo T-Shirts, Round Neck, etc. (4th level) — NO NEED NOW, handled inside final-category-grid -->
                       </div>
-                      <div class="category-item">
-                          <i class="fas fa-link"></i>
-                          <span>Chains</span>
-                      </div>
-                      <div class="category-item">
-                          <i class="fas fa-mobile-alt"></i>
-                          <span>Mobiles</span>
-                      </div>
-                      <div class="category-item">
-                          <i class="fas fa-headphones"></i>
-                          <span>Earphones</span>
-                      </div>
-                      <div class="category-item">
-                          <i class="fas fa-tshirt"></i>
-                          <span>Clothing</span>
-                      </div>
-                      <div class="category-item">
-                          <i class="fas fa-gem"></i>
-                          <span>Accessories</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                    <div class="spinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin fa-3x"></i>
+                    </div>
+
+                    <!-- Image Section -------------------------------->
+                    <h2 id="image-section-heading" style="text-align:center; color:#333; font-size:28px; margin-top:30px; display:none;"></h2>
+                    <div class="images-section">
+                        <!-- All images will appear here -->
+                    </div>
+                    <!-- Image Section Ends --------------------------->
+
+                    <!-- Result Section Starts --------------------------->
+                    <div id="result-image-box" style="display: none;">
+                        <button class="upload-image-button" onclick="uploadImages()">Generate Clothes Swap</button>
+                        <p class="mb-5" id="response"></p>
+                        <h3 id="result-heading" style="display:none;">Result:-</h3>
+                        <img width="300" height="370" id="resultImage" alt="Processed Image" style="display:none;"/>
+                    </div>
+                    <!-- Result Section Ends --------------------------->
+        
+                </div>
+            </div>
         </section>
 
-        <section class="subcategory-section">
-          <div class="card">
-              <div class="card-header">
-                  <h2>Select Subcategory</h2>
-              </div>
-              <div class="card-body">
-                  <div class="subcategory-grid">
-                      <div class="subcategory-item">
-                          <span>Analog Watches</span>
-                      </div>
-                      <div class="subcategory-item active">
-                          <span>Smart Watches</span>
-                      </div>
-                      <div class="subcategory-item">
-                          <span>Digital Watches</span>
-                      </div>
-                      <div class="subcategory-item">
-                          <span>Luxury Watches</span>
-                      </div>
-                      <div class="subcategory-item">
-                          <span>Sports Watches</span>
-                      </div>
-                      <div class="subcategory-item">
-                          <span>Kids Watches</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </section>
 
         <section class="product-details-section">
           <div class="card">
@@ -202,7 +255,7 @@
         </section>
   
 
-        {% if plan == "premium" %}
+        <!-- {% if plan == "premium" %}
             <div class="upscale-imageLink" style="margin-left: 7%;">
                 <h1>Upscale Your Images</h1>
                 <a href="https://www.pixelcut.ai/t/upscaler" target="_blank" rel="noopener noreferrer"><button class="bg-blue">Click here</button></a>
@@ -266,19 +319,19 @@
             <div id="Polo-T-shirts" class="d-flex align-content-stretch flex-wrap mt-4 d-none" style="margin-left: 7%;">
                 <h1>Choose Models</h1>
                 <div class="row">
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-1')" ><img id="garmentImage" width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-1.png" alt="id-1">1</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-2')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-2.png" alt="id-2">2</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-3')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-8.png" alt="id-8">3</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-4')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-4.png" alt="id-4">4</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-5')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-7.png" alt="id-7">5</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-6')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-6.png" alt="id-6">6</div>
-                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-7')" ><img width="140" height="180" src="../static/img/Models/Women/Crop_top/Model-9.png" alt="id-9">7</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-1')" ><img id="garmentImage" width="140" height="180" src="../static/img/models/women/crop-top/Model-1.png" alt="id-1">1</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-2')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-2.png" alt="id-2">2</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-3')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-8.png" alt="id-8">3</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-4')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-4.png" alt="id-4">4</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-5')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-7.png" alt="id-7">5</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-6')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-6.png" alt="id-6">6</div>
+                  <div class="col col-sm-2 border border-primary mb-3 mx-2 text-center" onclick="showItem('id-7')" ><img width="140" height="180" src="../static/img/models/women/crop-top/Model-9.png" alt="id-9">7</div>
                 </div>
             </div>
 
             <div id="id-1" class="upload_photo mt-5 d-none" style="margin-left: 7%;">
                 <h1>Upload Your Cloth Image</h1>
-                <input type="file" name="clothImage" id="clothImage" accept="image/*">
+                <input type="file" name="product-image" id="product-image" accept="image/*">
                 <figure class="cloth-image">
                     <img id="chosen-image">
                 </figure>
@@ -288,76 +341,37 @@
                 <img width="340" height="400" id="resultImage" alt="Processed Image" style="display:none;"/>
 
             </div>
-        {% endif %}
+        {% endif %} -->
 
       </div>
         
     </main> <!-- End #main -->
+    <script src="../static/js/add-products-buttons.js"></script>
     <script src="../static/js/main2.js"></script>
     <script src="../static/js/add-products2.js"></script>
     <script>
-        let uploadButton = document.getElementById("clothImage")
-        let chosenImage = document.getElementById("chosen-image")
-        let fileName = document.getElementById("file-name")
+        // let uploadButton = document.getElementById("product-image")
+        // let chosenImage = document.getElementById("chosen-image")
+        // let fileName = document.getElementById("file-name")
 
-        uploadButton.onchange = () => {
-            let reader = new FileReader();
-            reader.readAsDataURL(uploadButton.files[0]);
-            reader.onload = () => {
-                chosenImage.setAttribute("src", reader.result);
-            }
-            fileName.textContent = uploadButton.files[0].name;
-        }
+        // uploadButton.onchange = () => {
+        //     let reader = new FileReader();
+        //     reader.readAsDataURL(uploadButton.files[0]);
+        //     reader.onload = () => {
+        //         chosenImage.setAttribute("src", reader.result);
+        //     }
+        //     fileName.textContent = uploadButton.files[0].name;
+        // }
 
-        function showItem(itemId) {
-            if (itemId == "Women"){
-                document.getElementById("Men").classList.add('d-none');
-            }
-            else if (itemId == "Men"){
-                document.getElementById("Women").classList.add('d-none');
-            }
-            document.getElementById(itemId).classList.remove('d-none');
-        }
-
-
-        async function uploadImages() {
-            const garmentFile = document.getElementById("garmentImage").src;
-            const clothFile = document.getElementById("clothImage").files[0]; 
-
-            if (!garmentFile || !clothFile) {
-              alert("Please select both images.");
-              return;
-            }   
-
-            const formData = new FormData();
-            formData.append("cloth_image", clothFile);  
-
-            const response = await fetch(garmentFile);
-            const blob = await response.blob();
-            formData.append("garment_image", blob, "garment_image.jpg");
-            
-
-            try {
-              const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-              });   
-
-              const result = await response.json();
-              console.log("2");
-
-              if (result.output) {
-                console.log("1")
-                document.getElementById('resultImage').src = result.output;
-                document.getElementById('resultImage').style.display = 'block';
-              } else {
-                document.getElementById('response').innerText = result.error || 'Error processing image.';
-              }
-            } catch (error) {
-              console.error("Error:", error);
-              document.getElementById('response').innerText = "Error occurred while processing.";
-            }
-        }
+        // function showItem(itemId) {
+        //     if (itemId == "Women"){
+        //         document.getElementById("Men").classList.add('d-none');
+        //     }
+        //     else if (itemId == "Men"){
+        //         document.getElementById("Women").classList.add('d-none');
+        //     }
+        //     document.getElementById(itemId).classList.remove('d-none');
+        // }
 
     </script>
 

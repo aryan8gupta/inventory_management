@@ -7,10 +7,13 @@ import bcrypt
 import jwt
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
-from Inventify.settings import DB, PUBLIC_KEY
+from Inventify.settings import DB, PUBLIC_KEY, MEDIA_URL, MEDIA_ROOT
 # from Inventify.deployment import DB, PUBLIC_KEY
 from .models import YourModel
 
+from PIL import Image, ImageOps
+from io import BytesIO
+import os
 import requests
 import base64
 import time
@@ -127,6 +130,21 @@ def home(request):
     return render(request, 'home.html')
 
 
+def settings(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    return render(request, 'settings.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
+
+
 def exchange(request):
     valid = False
     data = {}
@@ -176,26 +194,130 @@ def scan_qr(request):
 
 @csrf_exempt
 def upload_image(request):
-    if request.method == 'POST':
-        garment_image = request.FILES.get('garment_image')
-        cloth_image = request.FILES.get('cloth_image')
 
-        if not garment_image or not cloth_image:
+    if request.method == 'POST':
+        model_image = request.FILES.get('model_image')
+        garment_image = request.FILES.get('garment_image')
+
+        if not model_image or not garment_image:
             return JsonResponse({"error": "Both images are required."})
 
-        # Send images to Pincel API
-        # files = {
-        #     'garment_image': (garment_image.name, garment_image.read(), garment_image.content_type),
-        #     'cloth_image': (cloth_image.name, cloth_image.read(), cloth_image.content_type),
-        #     "category": "upper_body",
-        #     "action": "startPrediction"
-        # }
+        
+        # Compress & Upscale Start ---------------------------------------------->
+        def compress_image(input_path, output_path, max_size_kb=1800, max_dimension=3000):
+            
+            # Check original file size
+            original_size_kb = input_path.size / 1024
 
+            # If already under the size limit, just copy or save without compression
+            if original_size_kb <= max_size_kb:
+                img = Image.open(input_path)
+                img = ImageOps.exif_transpose(img)
+
+                if img.mode in ("P", "RGBA"):
+                    img = img.convert("RGB")
+
+                img.save(output_path, optimize=True, quality=100)
+                return  # Done, no compression needed
+
+            # Otherwise, continue with resize + compression
+            img = Image.open(input_path)
+            img = ImageOps.exif_transpose(img)  # ✅ auto-rotate if needed
+
+            if img.mode in ("P", "RGBA"):
+                img = img.convert("RGB")
+
+            if max(img.size) > max_dimension:
+                img.thumbnail((max_dimension, max_dimension))
+
+            quality = 100
+            img.save(output_path, optimize=True, quality=quality)
+
+            while os.path.getsize(output_path) > max_size_kb * 1024 and quality > 10:
+                quality -= 2
+                img.save(output_path, optimize=True, quality=quality)
+        
+        
+        def upscale_image(input_path, output_path, scale_factor=6):
+            """
+            Upscale an image by the given scale_factor.
+            """
+            def open_image_from_url(image_url):
+                response = requests.get(image_url)
+                response.raise_for_status()  # raise error if request fails
+                return Image.open(BytesIO(response.content))  # open image from memory
+
+            img = open_image_from_url(input_path)  # where input_path is the HTTPS URL
+            new_size = (img.width * scale_factor, img.height * scale_factor)
+            upscaled_img = img.resize(new_size, Image.LANCZOS)
+            upscaled_img.save(output_path)
+            print("Upscaled")
+                
+        # Compress & Upscale End ---------------------------------------------->
+
+        # Encode Image Start -------------------------------------------------------->
         def encode_image(image):
             return base64.b64encode(image.read()).decode('utf-8')
+        # Encode Image End -------------------------------------------------------->
 
-        model_image_base64 = encode_image(garment_image)
-        garment_image_base64 = encode_image(cloth_image)
+        # Resize Image Start -------------------------------------------------------->
+        def resize_image(input_path, output_path):
+            img = Image.open(input_path)
+
+            # Convert to RGB before saving as JPEG
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Step 1: Resize while maintaining aspect ratio (fit inside 768x1024)
+            img.thumbnail((768, 1024), Image.LANCZOS)
+
+            # Step 2: Create new image with desired size and white background
+            background = Image.new('RGB', (768, 1024), (255, 255, 255))
+
+            # Step 3: Center the resized image onto the background
+            x = (768 - img.width) // 2
+            y = (1024 - img.height) // 2
+            background.paste(img, (x, y))
+
+            # Step 4: Save with high quality
+            background.save(output_path, format="JPEG", quality=100, optimize=False)
+
+        # Resize Image End -------------------------------------------------------->
+        
+        # Compress
+        compressed_path = os.path.join(MEDIA_ROOT, 'compressed-125.jpg')
+        compress_image(garment_image, compressed_path)
+
+
+        # Resize Image Start -------------------------------------------------------->
+        resized_garment_path = os.path.join(MEDIA_ROOT, 'resized_garment_image.jpg')
+        resize_image(compressed_path, resized_garment_path)
+
+        resized_model_path = os.path.join(MEDIA_ROOT, 'resized_model_image.jpg')
+        resize_image(model_image, resized_model_path)
+        # Resize Image End -------------------------------------------------------->
+
+        # model_image_base64 = encode_image(model_image)
+        # model_image_base64 = encode_image(garment_image)
+
+        with open(resized_model_path, 'rb') as image_file:
+            model_image_base64 = encode_image(image_file)
+
+        with open(resized_garment_path, 'rb') as image_file:
+            garment_image_base64 = encode_image(image_file)
+
+        # with open(compressed_path, 'rb') as image_file:
+        #     garment_image_base64 = encode_image(image_file)
+
+        #     # Print file size
+        #     file_size_kb = os.path.getsize(compressed_path) / 1024
+        #     print(f"File size: {file_size_kb:.2f} KB")
+
+
+        # # Open image to get dimensions
+        # with Image.open(compressed_path) as img:
+        #     width, height = img.size
+        #     print(f"Image dimensions: {width} x {height} pixels")
 
         headers = {
             'X-API-Key': PINCEL_API_KEY,
@@ -205,14 +327,13 @@ def upload_image(request):
         payload1 = {
             "model_image": f"data:image/jpeg;base64,{model_image_base64}",
             "garment_image": f"data:image/jpeg;base64,{garment_image_base64}",
-            "category": "upper_body", 
+            "category": "dresses", 
             "action": "startPrediction"
         }
 
         try:
             response1 = requests.post(PINCEL_API_URL, json=payload1, headers=headers)
             data1 = response1.json()
-            print(data1)
 
             payload2 = {
                 "predictionId": data1['prediction'],
@@ -228,7 +349,31 @@ def upload_image(request):
 
                     if status == 'succeeded':
                         print("✅ Prediction completed! Image URL:", data2.get('output'))
+
+                        def save_api_result_from_url(image_url, output_path):
+                            response = requests.get(image_url)
+                            if response.status_code == 200:
+                                with open(output_path, 'wb') as f:
+                                    f.write(response.content)
+                            else:
+                                print("Failed to download image. Status code:", response.status_code)
+
+                        # First Saving the Result
+                        output_path = os.path.join(MEDIA_ROOT, 'api_result.jpg')
+                        save_api_result_from_url(data2.get('output'), output_path)
+
+                        # Then upscale
+                        upscaled_path = os.path.join(MEDIA_ROOT, 'final_upscaled-125.jpg')
+                        upscale_image(data2.get('output'), upscaled_path)
+
+                        # Add path to the response
+                        data2['upscaled_path'] = upscaled_path
+
+                        relative_path = '/media/final_upscaled-125.jpg'
+                        data2['upscaled_url'] = request.build_absolute_uri(relative_path)
+
                         return JsonResponse(data2)
+                    
                     elif status == 'failed':
                         print("❗ Prediction failed:", data2.get('error', 'Unknown error'))
                         return None

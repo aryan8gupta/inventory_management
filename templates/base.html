@@ -50,87 +50,83 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          <div class="filter">
+            <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">4</span>
+            </button>
+            <ul>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <div class="dropdown-menu">
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+                <li class="dropdown-header">
+                  You have 4 new notifications
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li class="notification-item">
+                  <i class="bi bi-x-circle text-danger"></i>
+                  <div>
+                    <h4>Atque rerum nesciunt</h4>
+                    <p>Quae dolorem earum veritatis oditseno</p>
+                    <p>1 hr. ago</p>
+                  </div>
+                </li>
 
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li class="notification-item">
+                  <i class="bi bi-exclamation-circle text-warning"></i>
+                  <div class="flex-row">
+                    <h4>Lorem Ipsum</h4>
+                    <p class="text-sm">Quae dolorem earum veritatis oditseno</p>
+                    <p class="text-xs-center">30 min. ago</p>
+                  </div>
+                </li>
 
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
+            </ul>
+          </div>
 
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            {% comment %} <img src="static/img/profile-img.jpg" alt="Profile" class="rounded-circle"> {% endcomment %}
-            <i style = "color:blue; font-size:20px;"  class="bi bi-person-circle"></i>
-            <span class="d-none d-md-block ps-2">{{first_name}}</span>
-          </a><!-- End Profile Iamge Icon -->
+          <!-- <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> -->
+          <div class="filter">
+            <button style="border: 0px solid black; background-color: white; " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i style = "color:blue; font-size:20px;"  class="bi bi-person-circle"></i>
+              <span class="d-none d-md-block ps-2">{{first_name}}</span>
+            </button>
 
+            <!-- <img src="static/img/profile-img.jpg" alt="Profile" class="rounded-circle">  -->
+
+            <ul>
+              <div class="dropdown-menu">
+
+                <li class="nav-item">
+                  <a href="/settings/">Settings</a> 
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link collapsed" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="bi bi-box-arrow-right mx-1"></i>
+                    <span class="text-dark mx-1">Sign Out</span>
+                  </a>
+                </li><!-- End SignOut Page Nav -->
+
+              </div>
+            </ul>
+          </div>
         </li><!-- End Profile Nav -->
 
       </ul>

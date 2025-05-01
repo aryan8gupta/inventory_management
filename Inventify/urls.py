@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path
+from Inventify import settings
+from django.conf.urls.static import static
 
 from Inventify import views
 
@@ -50,4 +52,6 @@ urlpatterns = [
     path('delete/', views.delete),
     path('detail/', views.detail),
     path('update/', views.update),
-]
+    path('settings/', views.settings),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

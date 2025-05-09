@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block contain %}
+
+  <link rel="stylesheet" href="../static/css/scan-qrcode.css">
+
   {% if user_type == 'Shop Owners' %}
   <main id="main" class="main">
 
@@ -323,39 +326,39 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#"><img src="../static/img/Small_Water_Bottle.jpg" style="height: 5vh; width: 4vw;" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Small Water Bottle</a></td>
+                        <th scope="row"><a href="#"><img src="../static/img/models/women/suits/a-line-suits/a-line-suits-4.png" style="height: 10vh; width: 4vw; object-fit: contain;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Women A-line Suits</a></td>
                         <td>₹ 20</td>
                         <td class="fw-bold">40</td>
                         <td>₹ 280</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="../static/img/ketchup.jpeg" style="height: 5vh; width: 4vw;" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Small Ketchup-1</a></td>
+                        <th scope="row"><a href="#"><img src="../static/img/models/women/suits/straight-suits/straight-suits-1.png" style="height: 10vh; width: 4vw; object-fit: contain;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Women Straight Suits</a></td>
                         <td>₹ 10</td>
                         <td class="fw-bold">30</td>
                         <td>₹ 90</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="../static/img/Chowmein_Packet.jpg" style="height: 5vh; width: 4vw;" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Big Chowmein</a></td>
+                        <th scope="row"><a href="#"><img src="../static/img/models/men/t-shirts/half-sleeve-t-shirts/round neck t-shirts/round neck t-shirts-1.png" style="height: 10vh; width: 4vw; object-fit: contain;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Men Round Neck T-shirt</a></td>
                         <td>₹ 60</td>
                         <td class="fw-bold">20</td>
                         <td>₹ 1200</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="static/img/product-4.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>₹ 32</td>
-                        <td class="fw-bold">13</td>
-                        <td>₹ 201</td>
+                        <th scope="row"><a href="#"><img src="../static/img/models/women/crop-top/Model-1.png" style="height: 10vh; width: 4vw; object-fit: contain;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Women Crop Top</a></td>
+                        <td>₹ 60</td>
+                        <td class="fw-bold">20</td>
+                        <td>₹ 1200</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="static/img/product-5.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>₹ 79</td>
-                        <td class="fw-bold">8</td>
-                        <td>₹ 323</td>
+                        <th scope="row"><a href="#"><img src="../static/img/models/men/t-shirts/half-sleeve-t-shirts/polo-t-shirts/polo-t-shirts-1.png" style="height: 10vh; width: 4vw; object-fit: contain;" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold">Men Polo T-shirt</a></td>
+                        <td>₹ 60</td>
+                        <td class="fw-bold">20</td>
+                        <td>₹ 1200</td>
                       </tr>
                     </tbody>
                   </table>
@@ -370,6 +373,36 @@
 
         <!-- Right side columns -->
         <div class="col-lg-4">
+
+          <!-- Scan QrCode Card -->
+          <div class="card overflow-auto">
+            <!-- <div class="card info-card customers-card overflow-auto"> -->
+
+              <div class="qr-card">
+                <h2>Scan QR Code</h2>
+                <button id="scan-btn" class="btn">Start Scanning</button>
+                <button id="cancel-btn" class="btn">Cancel Scanning</button>
+                <div id="reader"></div>
+              </div>
+            <script src="https://unpkg.com/html5-qrcode"></script>
+            <script src="../static/js/scan-qrcode.js" defer></script>
+
+
+            <!-- </div> -->
+          </div><!-- End Scan QrCode Card -->
+
+
+          <!-- Start Explore Card -->
+          <div class="explore-card">
+            <div class="explore-card-content">
+              <h2>Discover Our Latest Collection</h2>
+              <button class="explore-btn" onclick="window.location.href='/products-2'">
+                Explore Products <span>→</span>
+              </button>
+            </div>
+          </div>
+          <!-- End Explore Card -->
+
 
           <!-- Recent Activity -->
           <div class="card overflow-auto">
@@ -397,7 +430,7 @@
                   <div class="activite-label">32 min</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                    Dispatched order to Pune 30 mins ago.
                   </div>
                 </div><!-- End activity item-->
 
@@ -405,7 +438,7 @@
                   <div class="activite-label">56 min</div>
                   <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
+                    Blue Denim Jeans (Size 32) sold to Mumbai 2 hours ago.
                   </div>
                 </div><!-- End activity item-->
 
@@ -413,7 +446,7 @@
                   <div class="activite-label">2 hrs</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                   <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
+                    New Arrival: Printed Cotton Kurti added.
                   </div>
                 </div><!-- End activity item-->
 
@@ -421,7 +454,7 @@
                   <div class="activite-label">1 day</div>
                   <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                   <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
+                    Order #2381 dispatched to Lucknow.
                   </div>
                 </div><!-- End activity item-->
 
@@ -429,7 +462,7 @@
                   <div class="activite-label">2 days</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
+                    Special offer claimed: ₹100 off on Women’s Suits.
                   </div>
                 </div><!-- End activity item-->
 
@@ -437,7 +470,7 @@
                   <div class="activite-label">4 weeks</div>
                   <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
                   <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                    Delivered: Full Suit Set to Bengaluru.
                   </div>
                 </div><!-- End activity item-->
 
@@ -445,6 +478,8 @@
 
             </div>
           </div><!-- End Recent Activity -->
+
+
 
           {% comment %} <!-- Budget Report -->
           <div class="card">
@@ -1038,7 +1073,9 @@
       </div>
     </section>
 
+
   </main><!-- End #main -->
+
   {% endif %}
 
 {% endblock %}

@@ -1,0 +1,289 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+}
+
+
+
+
+/* Time Range Buttons */
+#timeRangeButtons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.time-button {
+  padding: 8px 16px;
+  border: 1px solid #1e88e5;
+  background-color: #fff;
+  color: #1e88e5;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-button:hover {
+  background-color: #e3f2fd;
+}
+
+.time-button.active {
+  background-color: #1e88e5;
+  color: #fff;
+}
+
+
+/* Stat Card */
+#stat-card {
+  margin-bottom: 20px;
+}
+#stat-values {
+  display: flex;
+  gap: 20px;
+}
+
+#stat-values span[id$="Change"] {
+  font-size: 14px;
+  color: green;
+}
+
+#stat-values span[id$="Change"].negative {
+  color: red;
+}
+
+/* Icon with Card inside StatCard */
+.icon-card {
+  display: flex;
+  align-items: center; /* Vertically center the icon and info */
+  background-color: #fff;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  gap: 16px;
+  max-width: 100%;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0f0ff; /* Optional background */
+  border-radius: 50%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: #2563eb; /* Tailwind's blue-600 */
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.card-info .title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.card-info span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+
+/* Customer Growth & Revenue Chart Section */
+
+.chart-section {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensures responsiveness on small screens */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.chart-box {
+  flex: 1;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+
+.revenue-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+.chart-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+.view-detail-btn {
+  font-size: 14px;
+  color: #3B82F6;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#customerGrowth,
+#revenueChart {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Revenue Chart Bars */
+.chart-bars {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 200px;
+  margin-top: 20px;
+}
+
+.chart-bar {
+  width: 18%;
+  position: relative;
+}
+
+.bar {
+  width: 100%;
+  background-color: #1e88e5;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.bar-label {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.bar-value {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Top Transactions */
+#topTransactions {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.transaction-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.transaction-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-details p {
+  font-size: 14px;
+}
+
+.transaction-status {
+  font-weight: 600;
+  color: #43a047;
+}
+
+/* Top Products */
+#topProducts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.product-card {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-info {
+  color: #fff;
+  text-align: center;
+}
+
+.product-info h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.product-info p {
+  font-size: 14px;
+}

@@ -120,14 +120,34 @@ def verify_token(token):
     return True, decoded_token
 
 
-
-
-
 def index(request):
-    return render(request, 'index.html')
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
 
-def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
+
+
+def products_2(request):
+    valid = False
+    data = {}
+    if request.COOKIES.get('t'):
+        valid, data = verify_token(request.COOKIES['t'])
+    dashboard = None
+    if valid:
+        dashboard = 'dashboard'
+	
+    user_type = data.get('user_type')
+    user_name = data.get('first_name')
+
+    return render(request, 'products-2.html',  {'dashboard': dashboard, 'user_type': user_type, 'first_name': user_name})
 
 
 def settings(request):
